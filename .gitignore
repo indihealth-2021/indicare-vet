@@ -1,0 +1,10 @@
+application/config/*
+assets/images/news/*
+assets/images/users/*
+assets/images/bukti_pembayaran/*
+assets/images/bukti_pembayaran_obat/*
+assets/images/kegiatan_homecare/*
+assets/images/bukti_pembayaran_layanan_homecare/*
+assets/images/bukti_pembayaran_obat_homecare/*
+assets/files/*
+.well-known

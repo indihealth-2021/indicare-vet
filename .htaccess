@@ -1,0 +1,12 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+Options -Indexes
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^telemedicine\-internal\.indihealth\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.telemedicine\-internal\.indihealth\.com$
+RewriteRule ^/?$ "https\:\/\/telemedicine\-internal\.indihealth\.com\/" [R=301,L]
+
