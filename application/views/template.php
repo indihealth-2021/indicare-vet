@@ -372,6 +372,15 @@
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   <script>
+       $('#jawaban').on('shown.bs.modal', function () {
+           firebase
+                    .database()
+                    .ref("panggilan/<?= md5($user->id) ?>")
+                    .update({
+                    
+                      connected: 1,
+                    });
+          })
      <?php if ($user_2 && $user_2->id_user_kategori == 0) { ?>
     firebase.database().ref("panggilan/<?= md5($user->id) ?>").on('value', function(snapshot) {
              firebase
@@ -392,7 +401,8 @@
                 $("#jawab").attr('href',snapshot.val().consult_room);
 
                 // console.log(snapshot.val().call_idx);
-                
+                 // $('#jawaban').modal('hide'); 
+                 
               });
           })
     $("#jawab").click(function(){

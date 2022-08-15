@@ -149,7 +149,7 @@
                                       <div class="modal-dialog modal-dialog-centered" >
                                           <div class="modal-content" style="width: 400px">
                                               <div class="modal-header">
-                                                  <p class="modal-title font-24" id="exampleModalLabel">Memanggil...</p>
+                                                  <p class="modal-title font-24" id="ring_text"></p>
                                               </div>
                                               <div class="modal-body" align="center">
                                                   <i class="fa fa-phone fa-5x text-tele">....</i>
@@ -444,13 +444,19 @@
 
 
 <script type="text/javascript">
+ 
     firebase.database().ref("panggilan/<?=  md5($pasien->id) ?>").on('value', function(snapshot) {
              firebase
               .database()
               .ref("panggilan/<?= md5($pasien->id) ?>")
               .once("value", function (snapshot) {
                 console.log(snapshot.val());
-                if(snapshot.val().accepted == 1)
+                if(snapshot.val().connected == 1)
+                {
+                   $("#ring_text").html('Berdering...');
+                   
+                 } 
+                 if(snapshot.val().accepted == 1)
                 {
                    $('#memanggil').modal('hide');
                    
@@ -465,7 +471,14 @@
                    $('#memanggil').modal('hide');
                    Swal.fire('Panggilan anda ditolak pasien') 
                    
-                 } 
+                 }
+        // firebase
+        //           .database()
+        //           .ref("panggilan/<?= md5($pasien->id) ?>")
+        //           .update({
+                  
+        //             connected: 0,
+        //           }); 
     })
     })
     function makeid(length) {
@@ -483,7 +496,8 @@
     var room_name = '<?=  hash('sha256','telemedicine_idh_'.$id_jadwal_konsultasi.'_' .$user->id.'_'.random_string('alnum',8))?>';
 
  $('#call-btn').click(function(){
-        $('#memanggil').modal('show'); 
+        $('#memanggil').modal('show');
+        $("#ring_text").html('Memanggil...')
         firebase
           .database()
           .ref("panggilan/<?= md5($pasien->id); ?>")
@@ -495,6 +509,7 @@
             endCall: 0,
             accepted: 0,
             reject: 0,
+            connected: 0,
             roomName: room_name,
             id_jadwal_konsultasi: <?php echo $id_jadwal_konsultasi ?>,
             id_dokter: <?php echo $user->id ?>
