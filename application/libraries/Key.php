@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Key{
     
-	 private $fcm_server_key = 'AAAAd4kHX6E:APA91bFsPLVh_mjl7UqxhlcMe0vffYIyL40sTbH_JndVsK3TrHoeHvd6TZ5cOB0Ou24BFj44zcON2uxqKl15b81WKQr7u8tXhsU_Vd_6Wz0x-VbpN6G6sVTzvUttbHgu0Tc2VL4iuyGJ';
+	 private $fcm_server_key = 'AAAAtkmcuU0:APA91bFAhB746O53uKjEgvI0HfrO6dzYuhj8kax8EpfcMG0V7cdFTtbhUqR3nWQL49yWdhF3AdHwjrbre2vtnO5eqoFHmG5v06wVOztn4I9_ZqYPmW7Jmz35slwVOut1-smasgm7FjuO ';
 	private function get_fcm_server_key() {
         return $this->fcm_server_key;
     }
