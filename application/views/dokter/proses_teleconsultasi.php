@@ -122,7 +122,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button class="btn btn-send-mess mt-2" id="send">
+                                                    <button type="button" class="btn btn-send-mess mt-2" id="send">
                                                       <img src="<?php echo base_url('assets/dashboard/img/send.png'); ?>" width="20" height="auto" alt="">
                                                     </button>
                                                 </div>
@@ -139,7 +139,8 @@
                         </div>
                         <div class="tab-pane active" id="bottom-tab2">
                           <div class="row my-2 px-3">
-                            <button type="button" data-toggle="modal" data-target="#exampleModal" class="mb-2 btn btn-konsul" id="panggil" data-id-pasien="<?php echo $pasien->id ?>" data-id-jadwal-konsultasi="<?php echo $id_jadwal_konsultasi ?>"><img src="<?php echo base_url('assets/dashboard/img/phone-call.png'); ?>" alt=""> Hubungi Pasien</button>
+                            <!-- <button type="button" data-toggle="modal" data-target="#exampleModal" class="mb-2 btn btn-konsul" id="panggil" data-id-pasien="<?php echo $pasien->id ?>" data-id-jadwal-konsultasi="<?php echo $id_jadwal_konsultasi ?>"><img src="<?php echo base_url('assets/dashboard/img/phone-call.png'); ?>" alt=""> Hubungi Pasien</button> -->
+                            <button type="button" id="call-btn" class="mb-2 btn btn-konsul"><img src="<?php echo base_url('assets/dashboard/img/phone-call.png'); ?>" alt=""> Hubungi Pasien</button>
                             <button type="button" class="btn btn-konsul mx-3 d-mobile-none_" id="btn-stop" data-id-jadwal-konsultasi='<?php echo $id_jadwal_konsultasi ?>' data-id-pasien="<?php echo $pasien->id ?>"><img src="<?php echo base_url('assets/dashboard/img/end-call.png'); ?>" alt=""> Akhiri Panggilan</button>
                             
 
@@ -443,6 +444,30 @@
 
 
 <script type="text/javascript">
+    firebase.database().ref("panggilan/<?=  md5($pasien->id) ?>").on('value', function(snapshot) {
+             firebase
+              .database()
+              .ref("panggilan/<?= md5($pasien->id) ?>")
+              .once("value", function (snapshot) {
+                console.log(snapshot.val());
+                if(snapshot.val().accepted == 1)
+                {
+                   $('#memanggil').modal('hide');
+                   
+                 } 
+                if(snapshot.val().closeCall == 1)
+                {
+                   $('#memanggil').modal('hide');
+                   
+                 } 
+               if(snapshot.val().reject == 1)
+                {
+                   $('#memanggil').modal('hide');
+                   Swal.fire('Panggilan anda ditolak pasien') 
+                   
+                 } 
+    })
+    })
     function makeid(length) {
         var result = '';
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -455,7 +480,52 @@
     var uniqid = makeid(12);
     reg_id = '<?php echo $pasien->reg_id; ?>';
     name = '<?php echo $user->name; ?>';
-    var room_name = 'telemedicine_lintas_' + <?php echo $id_jadwal_konsultasi ?> + '_' + <?php echo $user->id ?> + '_' + uniqid;
+    var room_name = '<?=  hash('sha256','telemedicine_idh_'.$id_jadwal_konsultasi.'_' .$user->id.'_'.random_string('alnum',8))?>';
+
+ $('#call-btn').click(function(){
+        $('#memanggil').modal('show'); 
+        firebase
+          .database()
+          .ref("panggilan/<?= md5($pasien->id); ?>")
+          .set({
+            title: 'Panggilan dari <?= $user->name ?> ke <?= $pasien->name  ?>',
+            time: Date.now(),
+            consult_room: baseUrl + 'pasien/Telekonsultasi/konsultasi/' + <?= $user->id ?> + '/' + <?php echo $id_jadwal_konsultasi ?>+ '/' +room_name ,
+            closeCall: 0,
+            endCall: 0,
+            accepted: 0,
+            reject: 0,
+            roomName: room_name,
+            id_jadwal_konsultasi: <?php echo $id_jadwal_konsultasi ?>,
+            id_dokter: <?php echo $user->id ?>
+          });
+      });
+
+    function closeCall()
+      {
+         $('#memanggil').modal('hide'); 
+        firebase
+          .database()
+          .ref("panggilan/<?= md5($pasien->id); ?>")
+          .update({
+            title: 'Panggilan dari <?= $user->name ?> ke <?= $pasien->name  ?>',
+            time: Date.now(),
+            consult_room: baseUrl + 'pasien/Telekonsultasi/konsultasi/' + <?= $user->id ?> + '/' + <?php echo $id_jadwal_konsultasi ?>+ '/' +room_name ,
+            closeCall: 1,
+            endCall: 0,
+            accepted: 0,
+            // reject: 0,
+            // roomName: room_name,
+            id_jadwal_konsultasi: <?php echo $id_jadwal_konsultasi ?>,
+            id_dokter: <?php echo $user->id ?>
+          });
+      }
+
+      $('#memanggil').on('hidden.bs.modal', function () {
+            closeCall()
+        });
+
+    
     document.getElementById("user-call").value = '<?php echo $pasien->id ?>';
     var userName = name;
     const domain = 'telekonsultasi2.telemedical.id';
@@ -513,6 +583,7 @@
     function resizeInput() {
         $(this).attr('size', $(this).val().length);
     }
+
     $('input[type="text"]')
         .keyup(resizeInput)
         .each(resizeInput);

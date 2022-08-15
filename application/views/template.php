@@ -26,6 +26,33 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dashboard/css/style.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dashboard/css/select2.min.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dashboard/css/dataTables.bootstrap4.min.css'); ?>">
+   <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-messaging.js"></script>
+    <script src="<?php echo base_url('assets/dashboard/js/jquery-3.2.1.min.js'); ?>"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+ baseUrl = '<?php echo base_url(); ?>';
+
+    var firebaseConfig = {
+          apiKey: "AIzaSyB-RclJ3nO0yWpmXvhKUPDDD2RNwpT6h20",
+
+          authDomain: "telemedicine-internal.firebaseapp.com",
+
+          databaseURL: "https://telemedicine-internal-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+          projectId: "telemedicine-internal",
+
+          storageBucket: "telemedicine-internal.appspot.com",
+
+          messagingSenderId: "782919055693",
+
+          appId: "1:782919055693:web:68b90d015a672459381f04"
+
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dashboard/css/bootstrap-datetimepicker.min.css'); ?>">
 
   <!--[if lt IE 9]>
@@ -238,7 +265,7 @@
             <div class="modal-footer">
               <div class="mt-5 mx-auto">
                 <button type="button" class="btn btn-simpan" data-dismiss="modal" id="jawab_diampu" data-room-name="" data-id-diampu="" data-id-pasien="" data-dokter-diampu="">Jawab</button>
-                <button type="button" class="btn btn-batal" data-dismiss="modal" id="tolak_diampu" data-id-diampu="">Tolak</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="tolak_diampu" data-id-diampu="">Tolak</button>
               </div>
             </div>
           </div>
@@ -257,8 +284,8 @@
             </div>
             <div class="modal-footer">
               <div class="mt-5 mx-auto">
-                <button type="button" class="btn btn-simpan" data-dismiss="modal" id="jawab" data-id-jadwal-konsultasi="" data-room-name="" data-id-dokter="">Jawab</button>
-                <button type="button" class="btn btn-batal" data-dismiss="modal" id="tolak" data-id-dokter="">Tolak</button>
+                <a href="" class="btn btn-simpan" data-dismiss="modal" id="jawab" data-id-jadwal-konsultasi="" data-room-name="" data-id-dokter="">Jawab</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="tolak_pasien" data-id-dokter="">Tolak</button>
               </div>
             </div>
           </div>
@@ -323,7 +350,7 @@
   </div>
   </div>
   <div class="sidebar-overlay" data-reff=""></div>
-  <script src="<?php echo base_url('assets/dashboard/js/jquery-3.2.1.min.js'); ?>"></script>
+
   <script src="<?php echo base_url('assets/dashboard/js/popper.min.js'); ?>"></script>
   <script src="<?php echo base_url('assets/dashboard/js/bootstrap.min.js'); ?>"></script>
   <script src="<?php echo base_url('assets/dashboard/js/jquery.slimscroll.js'); ?>"></script>
@@ -339,15 +366,87 @@
   <script src="<?php echo base_url('assets/dashboard/js/bootstrap-datetimepicker.min.js') ?>"></script>
 
   <!--firebase-->
-  <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-messaging.js"></script>
+
 
    <!--sweetalert-->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   <script>
+     <?php if ($user_2 && $user_2->id_user_kategori == 0) { ?>
+    firebase.database().ref("panggilan/<?= md5($user->id) ?>").on('value', function(snapshot) {
+             firebase
+              .database()
+              .ref("panggilan/<?= md5($user->id) ?>")
+              .once("value", function (snapshot) {
+              
+                if(snapshot.val().closeCall == 1)
+                {
+                   $('#jawaban').modal('hide'); 
+                 } else{
+                   $('#jawaban').modal('show'); 
+                 }
+
+                $("#jawab").attr('data-id-jadwal-konsultasi',snapshot.val().id_jadwal_konsultasi);
+                $("#jawab").attr('data-room-name',snapshot.val().roomName);
+                $("#jawab").attr('data-id-dokter',snapshot.val().id_dokter);
+                $("#jawab").attr('href',snapshot.val().consult_room);
+
+                // console.log(snapshot.val().call_idx);
+                
+              });
+          })
+    $("#jawab").click(function(){
+      jawabCall();
+    })
+
+    $("#tolak_pasien").click(function(){
+      closeCall();
+    })
+    function closeCall()
+      {
+         $('#jawaban').modal('hide'); 
+        firebase
+          .database()
+          .ref("panggilan/<?= md5($user->id) ?>")
+          .update({
+          
+            time: Date.now(),
+            closeCall: 1,
+            reject: 1,
+            endCall: 0,
+            accepted: 0,
+          });
+      }
+    function jawabCall()
+      {
+         $('#jawaban').modal('hide'); 
+         firebase
+          .database()
+          .ref("panggilan/<?= md5($user->id) ?>")
+          .update({
+          
+            time: Date.now(),
+            closeCall: 1,
+            reject: 0,
+            endCall: 0,
+            accepted: 1,
+          });
+
+          firebase
+              .database()
+              .ref("panggilan/<?= md5($user->id) ?>")
+              .once("value", function (snapshot) {
+                  
+                $('#jawaban').modal('hide'); 
+                
+
+                $("#jawab").attr('href',snapshot.val().consult_room);
+                window.location.replace(snapshot.val().consult_room);
+                // console.log(snapshot.val().call_idx);
+                
+              });
+      }
+     <?php } ?>
     $('input[type=number]').on('focus', function(e) {
       $(this).on('wheel.disableScroll', function(e) {
         e.preventDefault()
@@ -393,18 +492,7 @@
   </script>
 
   <script>
-    baseUrl = '<?php echo base_url(); ?>';
-
-    var firebaseConfig = {
-      apiKey: "AIzaSyD936QRnRMkq02IgQ1kMg5ZYB1hEcuTwUM",
-      authDomain: "telehealth-6a164.firebaseapp.com",
-      databaseURL: "https://telehealth-6a164.firebaseio.com",
-      projectId: "telehealth-6a164",
-      storageBucket: "telehealth-6a164.appspot.com",
-      messagingSenderId: "513400070049",
-      appId: "1:513400070049:web:7da9b8978395a153a875e0"
-    };
-    firebase.initializeApp(firebaseConfig);
+  
     const pesan = firebase.messaging();
     pesan.getToken().then((currentToken) => {
       if (currentToken) {

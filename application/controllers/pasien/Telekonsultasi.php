@@ -94,12 +94,13 @@ class Telekonsultasi extends CI_Controller {
         echo "OK";
     }
 
-    public function konsultasi($id_dokter, $id_jadwal_konsultasi){
+    public function konsultasi($id_dokter=null, $id_jadwal_konsultasi=null,$roomName=null){
         if(!$id_dokter || !$id_jadwal_konsultasi){
             show_404();
         }
         $jadwal_konsultasi = $this->db->query('SELECT id FROM jadwal_konsultasi WHERE id = '.$id_jadwal_konsultasi)->row();
         if(!$jadwal_konsultasi){
+
             show_404();
         }
         if(!$this->session->userdata('is_login')){
@@ -114,13 +115,13 @@ class Telekonsultasi extends CI_Controller {
                 redirect(base_url('admin/Admin'));
             }
         }
-      $post_data = $this->input->post();
+      $post_data = $this->input->get();
     //   echo var_dump($post_data);
     //   die;
-      if(!isset($post_data['roomName'])){
+      if(!isset($roomName)){
           show_404();
       }
-      $roomName = $post_data['roomName'];
+      $roomName = $roomName;
 
       $data['title'] = 'Telekonsultasi';
       $data['roomName'] = $roomName;

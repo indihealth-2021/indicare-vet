@@ -405,7 +405,7 @@ class Teleconsultasi extends CI_Controller
           ';
         $data['js_addons'] = "
 <script src='https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js'></script> 
-<script>
+
     
     <script src='" . base_url('assets/adminLTE/plugins/datatables/jquery.dataTables.min.js') . "'></script>
                                 <script src='" . base_url('assets/adminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') . "'></script>
