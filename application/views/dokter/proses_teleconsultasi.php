@@ -481,11 +481,11 @@
             //           });
 
              $('#formResepDokter').append($('#formKonsultasi').children())
-             $.ajax({
-                    method : 'POST',
-                    url    : baseUrl+"Conference/end_call",
-                    data   : {reg: '<?php echo $id_registrasi ?>',id_pasien:<?php echo $pasien->id ?>, id_jadwal_konsultasi: <?= $id_jadwal_konsultasi ?> },
-                    success : function(data){
+             // $.ajax({
+             //        method : 'POST',
+             //        url    : baseUrl+"Conference/end_call",
+             //        data   : {reg: '<?php echo $id_registrasi ?>',id_pasien:<?php echo $pasien->id ?>, id_jadwal_konsultasi: <?= $id_jadwal_konsultasi ?> },
+             //        success : function(data){
                              $.ajax({
                             method : 'POST',
                             url    : baseUrl+'dokter/Teleconsultasi/send_data_konsultasi',
@@ -509,7 +509,7 @@
                     error : function(data){
                          alert(data);
                     }        
-                    });
+                    // });
                
           } 
         })

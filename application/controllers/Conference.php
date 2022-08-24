@@ -324,7 +324,7 @@ class Conference extends CI_Controller
     );
     $msg_notif = json_encode($msg_notif);
 
-    $this->key->_send_fcm($pasien->reg_id, $msg_notif);
+    // $this->key->_send_fcm($pasien->reg_id, $msg_notif);
 
     $notifikasi_2 = 'Panggilan konsultasi dengan Pasien ' . $pasien->name . ' berakhir';
     $now_2 = (new DateTime('now'))->format('Y-m-d H:i:s');
@@ -345,7 +345,7 @@ class Conference extends CI_Controller
     );
     $msg_notif_2 = json_encode($msg_notif_2);
 
-    $this->key->_send_fcm($dokter->reg_id, $msg_notif_2);
+    // $this->key->_send_fcm($dokter->reg_id, $msg_notif_2);
 
     $data_history = array("activity" => "Konsultasi Berakhir", "id_user" => $this->session->userdata('id_user'), "target_id_user" => $id_pasien);
     $this->db->insert('data_history_log_dokter', $data_history);
