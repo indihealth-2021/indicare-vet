@@ -398,6 +398,8 @@
                                 <div class="form-group">
                                     <label for="message-text" class="font-12 col-form-label">Jumlah Obat</label>
                                     <input type="number" min=1 max=100 name="jumlah_obat" class="form-control form-control-sm" id="unit" placeholder="Jumlah" required>
+                                    <input type='hidden' value="<?= $pasien->id  ?>" name="id_pasien" id="id_pasien">
+                                    <input type='hidden' value="<?= $id_jadwal_konsultasi  ?>" name="id_jadwal_konsultasi" id="id_jadwal_konsultasi">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -471,32 +473,44 @@
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
-            firebase
-                      .database()
-                      .ref("panggilan/<?= md5($pasien->id); ?>")
-                      .update({
-                        endCall: 1,
-                      });
-             // $('#formResepDokter').append($('#formKonsultasi').children())
-             //   $.ajax({
-             //        method : 'POST',
-             //        url    : baseUrl+'dokter/Teleconsultasi/send_data_konsultasi',
-             //        data   : $('#formResepDokter').serializeArray(),
-             //        success : function(data){
-             //            firebase
-             //          .database()
-             //          .ref("panggilan/<?= md5($pasien->id); ?>")
-             //          .update({
-             //            endCall: 1,
-             //          });
-             //           location.href = '<?= base_url('dokter/Teleconsultasi')?>';    
-             //        },
-             //        error : function(request, status, error){
-             //            console.log(request);
-             //            console.log(status);
-             //            console.log(error);
-             //        }
-             //    }); 
+            // firebase
+            //           .database()
+            //           .ref("panggilan/<?= md5($pasien->id); ?>")
+            //           .update({
+            //             endCall: 1,
+            //           });
+
+             $('#formResepDokter').append($('#formKonsultasi').children())
+             $.ajax({
+                    method : 'POST',
+                    url    : baseUrl+"Conference/end_call",
+                    data   : {reg: '<?php echo $id_registrasi ?>',id_pasien:<?php echo $pasien->id ?>, id_jadwal_konsultasi: <?= $id_jadwal_konsultasi ?> },
+                    success : function(data){
+                             $.ajax({
+                            method : 'POST',
+                            url    : baseUrl+'dokter/Teleconsultasi/send_data_konsultasi',
+                            data   : $('#formResepDokter').serializeArray(),
+                            success : function(data){
+                                firebase
+                              .database()
+                              .ref("panggilan/<?= md5($pasien->id); ?>")
+                              .update({
+                                endCall: 1,
+                              });
+                               location.href = '<?= base_url('dokter/Teleconsultasi')?>';    
+                            },
+                            error : function(request, status, error){
+                                console.log(request);
+                                console.log(status);
+                                console.log(error);
+                            }
+                        });         
+                    },
+                    error : function(data){
+                         alert(data);
+                    }        
+                    });
+               
           } 
         })
 
