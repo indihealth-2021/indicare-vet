@@ -141,7 +141,8 @@
                           <div class="row my-2 px-3">
                             <!-- <button type="button" data-toggle="modal" data-target="#exampleModal" class="mb-2 btn btn-konsul" id="panggil" data-id-pasien="<?php echo $pasien->id ?>" data-id-jadwal-konsultasi="<?php echo $id_jadwal_konsultasi ?>"><img src="<?php echo base_url('assets/dashboard/img/phone-call.png'); ?>" alt=""> Hubungi Pasien</button> -->
                             <button type="button" id="call-btn" class="mb-2 btn btn-konsul"><img src="<?php echo base_url('assets/dashboard/img/phone-call.png'); ?>" alt=""> Hubungi Pasien</button>
-                            <button type="button" class="btn btn-konsul mx-3 d-mobile-none_" id="btn-stop" data-id-jadwal-konsultasi='<?php echo $id_jadwal_konsultasi ?>' data-id-pasien="<?php echo $pasien->id ?>"><img src="<?php echo base_url('assets/dashboard/img/end-call.png'); ?>" alt=""> Akhiri Panggilan</button>
+                            <!-- <button type="button" class="btn btn-konsul mx-3 d-mobile-none_" id="btn-stop" data-id-jadwal-konsultasi='<?php echo $id_jadwal_konsultasi ?>' data-id-pasien="<?php echo $pasien->id ?>"><img src="<?php echo base_url('assets/dashboard/img/end-call.png'); ?>" alt=""> Akhiri Panggilan</button>  -->  
+                            <button type="button" class="btn btn-konsul mx-3 d-mobile-none_" id="btn-stop-call"><img src="<?php echo base_url('assets/dashboard/img/end-call.png'); ?>" alt=""> Akhiri Panggilan</button>
                             
 
                                   <!-- Modal -->
@@ -442,9 +443,132 @@
     </div>
 </div>
 
+<script>
 
+        firebase
+              .database()
+              .ref("assesment/<?= md5($pasien->id."_".$id_jadwal_konsultasi)?>")
+              .once("value", function (snapshot) {
+                firebase
+                          .database()
+                          .ref('assesment/<?= md5($pasien->id."_".$id_jadwal_konsultasi)?>')
+                          .update({ 
+                           
+                            inputed: 0,
+            })
+        })
+        
+    // ENDCALL
+    $('#btn-stop-call').click(function(){
+   
+   
+    Swal.fire({
+          title: 'Akhiri konsultasi ini?',
+          // showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'Akhiri Panggilan',
+          cancelButtonText: 'Batalkan',
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            firebase
+                      .database()
+                      .ref("panggilan/<?= md5($pasien->id); ?>")
+                      .update({
+                        endCall: 1,
+                      });
+             // $('#formResepDokter').append($('#formKonsultasi').children())
+             //   $.ajax({
+             //        method : 'POST',
+             //        url    : baseUrl+'dokter/Teleconsultasi/send_data_konsultasi',
+             //        data   : $('#formResepDokter').serializeArray(),
+             //        success : function(data){
+             //            firebase
+             //          .database()
+             //          .ref("panggilan/<?= md5($pasien->id); ?>")
+             //          .update({
+             //            endCall: 1,
+             //          });
+             //           location.href = '<?= base_url('dokter/Teleconsultasi')?>';    
+             //        },
+             //        error : function(request, status, error){
+             //            console.log(request);
+             //            console.log(status);
+             //            console.log(error);
+             //        }
+             //    }); 
+          } 
+        })
+
+        // $.ajax({
+        //             method : 'POST',
+        //             url    : baseUrl+'dokter/Teleconsultasi/send_data_konsultasi',
+        //             data   : $('#formResepDokter').serializeArray(),
+        //             success : function(data){
+        //                location.href = '<?= base_url('dokter/Teleconsultasi')?>';    
+        //             },
+        //             error : function(request, status, error){
+        //                 console.log(request);
+        //                 console.log(status);
+        //                 console.log(error);
+        //             }
+        //         }); 
+     
+
+    })
+</script>
 <script type="text/javascript">
- 
+    
+     firebase.database().ref("assesment/<?= md5($pasien->id."_".$id_jadwal_konsultasi)?>").on('value', function(snapshot) {
+             firebase
+              .database()
+              .ref("assesment/<?= md5($pasien->id."_".$id_jadwal_konsultasi)?>")
+              .once("value", function (snapshot) {
+                // console.log(snapshot.val());
+                if(snapshot.val().inputed == 1)
+                {
+                    Swal.fire('Pasien telah mengupdate assestment.') 
+                $('input[name=berat_badan]').val(snapshot.val().berat_badan);
+              $('input[name=tinggi_badan]').val(snapshot.val().tinggi_badan);
+              $('input[name=suhu]').val(snapshot.val().suhu);
+              $('input[name=tekanan_darah]').val(snapshot.val().tekanan_darah);
+              if (snapshot.val().merokok == 1) {
+                $('#merokok-1').prop('checked', true);
+              } else {
+                $('#merokok-0').prop('checked', true);
+              }
+
+              if (snapshot.val().alkohol == 1) {
+                $('#alkohol-1').prop('checked', true);
+              } else {
+                $('#alkohol-0').prop('checked', true);
+              }
+
+              if (snapshot.val().kecelakaan == 1) {
+                $('#kecelakaan-1').prop('checked', true);
+              } else {
+                $('#kecelakaan-0').prop('checked', true);
+              }
+
+              if (snapshot.val().dirawat == 1) {
+                $('#dirawat-1').prop('checked', true);
+              } else {
+                $('#dirawat-0').prop('checked', true);
+              }
+
+              if (snapshot.val().operasi == 1) {
+                $('#operasi-1').prop('checked', true);
+              } else {
+                $('#operasi-0').prop('checked', true);
+              }
+
+              $('textarea[name=keluhan]').val(snapshot.val().keluhan);
+                   
+                 } 
+                 
+    })
+    })
+
     firebase.database().ref("panggilan/<?=  md5($pasien->id) ?>").on('value', function(snapshot) {
              firebase
               .database()
@@ -503,6 +627,7 @@
           .ref("panggilan/<?= md5($pasien->id); ?>")
           .set({
             title: 'Panggilan dari <?= $user->name ?> ke <?= $pasien->name  ?>',
+            call_From: 'Panggilan dari <?= $user->name ?>',
             time: Date.now(),
             consult_room: baseUrl + 'pasien/Telekonsultasi/konsultasi/' + <?= $user->id ?> + '/' + <?php echo $id_jadwal_konsultasi ?>+ '/' +room_name ,
             closeCall: 0,

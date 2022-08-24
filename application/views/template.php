@@ -258,6 +258,7 @@
           <div class="modal-content mx-auto" style="width: 400px">
             <div class="modal-header">
               <p class="modal-title font-24" id="exampleModalLabel">Panggilan...</p>
+
             </div>
             <div class="modal-body" align="center">
               <i class="fas fa-phone fa-5x text-tele">....</i>
@@ -277,7 +278,8 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content mx-auto" style="width: 400px">
             <div class="modal-header">
-              <p class="modal-title font-24" id="exampleModalLabel">Panggilan...</p>
+              <p class="modal-title font-24" id="name_panggilan"></p>
+
             </div>
             <div class="modal-body" align="center">
               <i class="fas fa-phone fa-5x text-tele">....</i>
@@ -392,12 +394,15 @@
                 {
                    $('#jawaban').modal('hide'); 
                  } else{
+                   var audio = document.getElementById('bell-ring');
+                  audio.play();
                    $('#jawaban').modal('show'); 
                  }
 
                 $("#jawab").attr('data-id-jadwal-konsultasi',snapshot.val().id_jadwal_konsultasi);
                 $("#jawab").attr('data-room-name',snapshot.val().roomName);
                 $("#jawab").attr('data-id-dokter',snapshot.val().id_dokter);
+                $("#name_panggilan").html(snapshot.val().call_From);
                 $("#jawab").attr('href',snapshot.val().consult_room);
 
                 // console.log(snapshot.val().call_idx);
@@ -571,50 +576,50 @@
         echo $teleconsul_admin_js;
       } ?>
       if (JSON.parse(JSON.parse(payload.data.body).id_user).includes(userid.toString())) {
-        if (JSON.parse(JSON.parse(payload.data.body).name == 'unshow')) {
-          if (JSON.parse(JSON.parse(payload.data.body).sub_name == 'submit_assesment_pasien')) {
-            alert('Assesment telah diupdate, pasien baru mengisi assesment!');
-            var path = window.location.pathname;
-            var path = path.toLowerCase();
-            if (path.includes('dokter/teleconsultasi/proses_teleconsultasi')) {
-              $('input[name=berat_badan]').val(JSON.parse(payload.data.body).berat_badan);
-              $('input[name=tinggi_badan]').val(JSON.parse(payload.data.body).tinggi_badan);
-              $('input[name=suhu]').val(JSON.parse(payload.data.body).suhu);
-              $('input[name=tekanan_darah]').val(JSON.parse(payload.data.body).tekanan_darah);
-              if (JSON.parse(payload.data.body).merokok == 1) {
-                $('#merokok-1').prop('checked', true);
-              } else {
-                $('#merokok-0').prop('checked', true);
-              }
+        // if (JSON.parse(JSON.parse(payload.data.body).name == 'unshow')) {
+        //   if (JSON.parse(JSON.parse(payload.data.body).sub_name == 'submit_assesment_pasien')) {
+        //     alert('Assesment telah diupdate, pasien baru mengisi assesment!');
+        //     var path = window.location.pathname;
+        //     var path = path.toLowerCase();
+        //     if (path.includes('dokter/teleconsultasi/proses_teleconsultasi')) {
+        //       $('input[name=berat_badan]').val(JSON.parse(payload.data.body).berat_badan);
+        //       $('input[name=tinggi_badan]').val(JSON.parse(payload.data.body).tinggi_badan);
+        //       $('input[name=suhu]').val(JSON.parse(payload.data.body).suhu);
+        //       $('input[name=tekanan_darah]').val(JSON.parse(payload.data.body).tekanan_darah);
+        //       if (JSON.parse(payload.data.body).merokok == 1) {
+        //         $('#merokok-1').prop('checked', true);
+        //       } else {
+        //         $('#merokok-0').prop('checked', true);
+        //       }
 
-              if (JSON.parse(payload.data.body).alkohol == 1) {
-                $('#alkohol-1').prop('checked', true);
-              } else {
-                $('#alkohol-0').prop('checked', true);
-              }
+        //       if (JSON.parse(payload.data.body).alkohol == 1) {
+        //         $('#alkohol-1').prop('checked', true);
+        //       } else {
+        //         $('#alkohol-0').prop('checked', true);
+        //       }
 
-              if (JSON.parse(payload.data.body).kecelakaan == 1) {
-                $('#kecelakaan-1').prop('checked', true);
-              } else {
-                $('#kecelakaan-0').prop('checked', true);
-              }
+        //       if (JSON.parse(payload.data.body).kecelakaan == 1) {
+        //         $('#kecelakaan-1').prop('checked', true);
+        //       } else {
+        //         $('#kecelakaan-0').prop('checked', true);
+        //       }
 
-              if (JSON.parse(payload.data.body).dirawat == 1) {
-                $('#dirawat-1').prop('checked', true);
-              } else {
-                $('#dirawat-0').prop('checked', true);
-              }
+        //       if (JSON.parse(payload.data.body).dirawat == 1) {
+        //         $('#dirawat-1').prop('checked', true);
+        //       } else {
+        //         $('#dirawat-0').prop('checked', true);
+        //       }
 
-              if (JSON.parse(payload.data.body).operasi == 1) {
-                $('#operasi-1').prop('checked', true);
-              } else {
-                $('#operasi-0').prop('checked', true);
-              }
+        //       if (JSON.parse(payload.data.body).operasi == 1) {
+        //         $('#operasi-1').prop('checked', true);
+        //       } else {
+        //         $('#operasi-0').prop('checked', true);
+        //       }
 
-              $('textarea[name=keluhan]').val(JSON.parse(payload.data.body).keluhan);
-            }
-          }
-        }
+        //       $('textarea[name=keluhan]').val(JSON.parse(payload.data.body).keluhan);
+        //     }
+        //   }
+        // }
 
         if(JSON.parse(JSON.parse(payload.data.body).sub_name == 'pengampu_typing_cp')){
           $('#catatan_pengampu').val(JSON.parse(payload.data.body).catatan_pengampu);

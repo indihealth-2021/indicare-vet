@@ -533,6 +533,28 @@
 
 
 <script type="text/javascript">
+    firebase.database().ref("panggilan/<?=  md5($user->id) ?>").on('value', function(snapshot) {
+             firebase
+              .database()
+              .ref("panggilan/<?= md5($user->id) ?>")
+              .once("value", function (snapshot) {
+                console.log(snapshot.val());
+                
+               if(snapshot.val().endCall == 1)
+                {
+                   location.href = '<?= base_url('pasien/Pasien')?>';   
+                   
+                 }
+        // firebase
+        //           .database()
+        //           .ref("panggilan/<?= md5($pasien->id) ?>")
+        //           .update({
+                  
+        //             connected: 0,
+        //           }); 
+    })
+    })
+
     name = '<?php echo $user->name; ?>';
     var room_name = '<?php echo $roomName ?>';
     var userName = name;

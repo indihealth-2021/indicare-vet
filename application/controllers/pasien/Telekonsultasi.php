@@ -166,7 +166,24 @@ class Telekonsultasi extends CI_Controller {
                     method : 'POST',
                     url    : baseUrl+'pasien/Telekonsultasi/submitAssesment',
                     data   : $('#formModalAssesment').serialize()+'&csrfName=".$this->security->get_csrf_token_name()."&csrfHash=".$this->security->get_csrf_hash()."',
-                    success : function(data){                                           
+                    success : function(data){ 
+                    firebase
+                          .database()
+                          .ref('assesment/".md5($this->session->userdata('id_user')."_".$id_jadwal_konsultasi)."')
+                          .update({ 
+                           
+                            inputed: 1,
+                            berat_badan: $('#formModalAssesment input[name=berat_badan]').val(),
+                            tinggi_badan: $('#formModalAssesment input[name=tinggi_badan]').val(),
+                            suhu: $('#formModalAssesment input[name=suhu]').val(),
+                            tekanan_darah: $('#formModalAssesment input[name=tekanan_darah]').val(),
+                            merokok: $('#formModalAssesment input[name=merokok]').val(),
+                            alkohol: $('#formModalAssesment input[name=alkohol]').val(),
+                            kecelakaan: $('#formModalAssesment input[name=kecelakaan]').val(),
+                            dirawat: $('#formModalAssesment input[name=dirawat]').val(),
+                            operasi: $('#formModalAssesment input[name=operasi]').val(),
+                            keluhan: $('#formModalAssesment textarea[name=keluhan]').val(),
+                          });                                          
                         $('#formAssesment input[name=berat_badan]').val($('#formModalAssesment input[name=berat_badan]').val());
                         $('#formAssesment input[name=tinggi_badan]').val($('#formModalAssesment input[name=tinggi_badan]').val());
                         $('#formAssesment input[name=suhu]').val($('#formModalAssesment input[name=suhu]').val());
