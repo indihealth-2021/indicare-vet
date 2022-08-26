@@ -336,7 +336,7 @@ class Teleconsultasi extends CI_Controller
         $data_history = array("activity" => "Diagnosis", "id_user" => $this->session->userdata('id_user'), "target_id_user" => $data['id_pasien']);
         $this->db->insert('data_history_log_dokter', $data_history);
 
-        $jml_data_resep = count($data['keterangan']);
+        $jml_data_resep = count($data['obat']);
         for ($i = 0; $i < $jml_data_resep; $i++) {
             $obat = $this->db->query('SELECT harga_per_n_unit, harga FROM master_obat WHERE id = '.$data['id_obat'][$i])->row();
             $data_resep = array(
@@ -432,6 +432,7 @@ function checkRemove() {
     }
 };
 $(document).ready(function() {
+
     $('.chat-wrap-inner').scrollTop($('.chat-wrap-inner')[0].scrollHeight);
     checkRemove();
     $('#add').click(function() {
@@ -444,8 +445,12 @@ $(document).ready(function() {
         $('div.resep-dokter:last').remove();
         checkRemove();
     });
-
+    $('[hapus-obat]').click(function(e){
+        alert('aa');
+        })
+        dataobat_ls =[];
     $('#formResepDokter').submit(function(e){
+         e.preventDefault();
         var dataResep = $(this).serializeArray();
         var namaObat = $('select[name=id_obat] option:selected').text();
         var listResep = $('#listResep');
@@ -455,14 +460,16 @@ $(document).ready(function() {
             countTr = 0;
         }
         countTr+=1;
-        var templateListResep = '<tr><td>'+namaObat+'</td><td>'+dataResep[2].value+' '+dataResep[4].value+'</td><td>'+dataResep[3].value+'</td><td><button class=\'btn btn-secondary\' type=\'button\' onclick=\'return (this.parentNode).parentNode.remove();\' ><i class=\'fas fa-trash-alt\'></i></button></td><input type=\'hidden\' name=\''+dataResep[0].name+'[]\' value=\''+dataResep[0].value+'\'><input type=\'hidden\' name=\''+dataResep[1].name+'[]\' value=\''+dataResep[1].value+'\'><input type=\'hidden\' name=\''+dataResep[2].name+'[]\' value=\''+dataResep[2].value+'\'><input type=\'hidden\' name=\''+dataResep[3].name+'[]\' value=\''+dataResep[3].value+'\'></tr>';
+        var templateListResep = '<tr><td>'+namaObat+'</td><td>'+dataResep[2].value+' '+dataResep[4].value+'</td><td>'+dataResep[3].value+'</td><td><button class=\'btn btn-secondary\' type=\'button\' hapus-obat onclick=\'return (this.parentNode).parentNode.remove();\' ><i class=\'fas fa-trash-alt\'></i></button></td><input type=\'hidden\' name=\''+dataResep[0].name+'[]\' value=\''+dataResep[0].value+'\'><input type=\'hidden\' name=\''+dataResep[1].name+'[]\' value=\''+dataResep[1].value+'\'><input type=\'hidden\' name=\''+dataResep[2].name+'[]\' value=\''+dataResep[2].value+'\'><input type=\'hidden\' name=\''+dataResep[3].name+'[]\' value=\''+dataResep[3].value+'\'></tr>';
         listResep.append(templateListResep);
         $(this)[0].reset();
         $('#ModalResep').modal('hide');
         alert('Resep telah ditambahkan!');
-        e.preventDefault();
+        dataobat_ls.push(dataResep)
+        console.log(dataobat_ls);
+       
     });
-
+   
     $('select[name=diagnosis]').select2({
           ajax: {
             url: '" . base_url('dokter/Teleconsultasi/get_active_diagnoses') . "',

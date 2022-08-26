@@ -446,7 +446,7 @@
 </div>
 
 <script>
-
+var data_obat;
         firebase
               .database()
               .ref("assesment/<?= md5($pasien->id."_".$id_jadwal_konsultasi)?>")
@@ -481,11 +481,12 @@
             //           });
 
              $('#formResepDokter').append($('#formKonsultasi').children())
-             $.ajax({
-                    method : 'POST',
-                    url    : baseUrl+"Conference/end_call",
-                    data   : {reg: '<?php echo $id_registrasi ?>',id_pasien:<?php echo $pasien->id ?>, id_jadwal_konsultasi: <?= $id_jadwal_konsultasi ?> },
-                    success : function(data){
+             $('#formResepDokter').append($('#formKonsultasi_2').children())
+             // $.ajax({
+             //        method : 'POST',
+             //        url    : baseUrl+"Conference/end_call",
+             //        data   : {reg: '<?php echo $id_registrasi ?>',id_pasien:<?php echo $pasien->id ?>, id_jadwal_konsultasi: <?= $id_jadwal_konsultasi ?> },
+             //        success : function(data){
                              $.ajax({
                             method : 'POST',
                             url    : baseUrl+'dokter/Teleconsultasi/send_data_konsultasi',
@@ -497,7 +498,7 @@
                               .update({
                                 endCall: 1,
                               });
-                               location.href = '<?= base_url('dokter/Teleconsultasi')?>';    
+                               // location.href = '<?= base_url('dokter/Teleconsultasi')?>';    
                             },
                             error : function(request, status, error){
                                 console.log(request);
@@ -505,11 +506,11 @@
                                 console.log(error);
                             }
                         });         
-                    },
-                    error : function(data){
-                         alert(data);
-                    }        
-                    });
+                    // },
+                    // error : function(data){
+                    //      alert(data);
+                    // }        
+                    // });
                
           } 
         })
