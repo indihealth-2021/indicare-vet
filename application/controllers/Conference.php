@@ -283,23 +283,41 @@ class Conference extends CI_Controller
   {
     // echo var_dump($this->input->post('data_konsultasi').'&'.$this->input->post('data_konsultasi_2'));
     // die;
+
+        $this->db->from('resep_obat_cart');
+        $q = $this->db->where(array('id_jadwal_konsultasi' => $this->input->post('id_jadwal_konsultasi'),'id_dokter' => $this->session->userdata('id_user')))->count_all_results();
+
+      if(empty($this->input->post('diagnosis')))
+      {
+        http_response_code(400);
+        header('Content-Type: application/json');
+        echo json_encode(['error' => true,'message' => "Diagnosa harus diisi."]);
+        exit();
+      } 
+      if($q <= 0  )
+      {
+        http_response_code(400);
+        header('Content-Type: application/json');
+        echo json_encode(['error' => true,'message' => "Resep obat harus diisi."]);
+        exit();
+      }
     $id = $this->input->post('reg');
     $id_pasien = $this->input->post('id_pasien');
     $id_jadwal_konsultasi = $this->input->post('id_jadwal_konsultasi');
-    $jadwal_konsultasi = $this->db->query('SELECT id,id_registrasi FROM jadwal_konsultasi WHERE id = ' . $id_jadwal_konsultasi)->row();
-    $dokter = $this->db->query('SELECT id,name,reg_id FROM master_user WHERE id = ' . $this->session->userdata('id_user'))->row();
-    $pasien = $this->db->query('SELECT reg_id,name FROM master_user WHERE id = ' . $id_pasien)->row();
+    $jadwal_konsultasi = $this->db->query('SELECT id,id_registrasi FROM jadwal_konsultasi WHERE id = ?',[$id_jadwal_konsultasi])->row();
+    $dokter = $this->db->query('SELECT id,name,reg_id FROM master_user WHERE id = ?',[$this->session->userdata('id_user')])->row();
+    $pasien = $this->db->query('SELECT reg_id,name FROM master_user WHERE id = ?',[$id_pasien])->row();
     if ($jadwal_konsultasi) {
       $this->db->delete('jadwal_konsultasi', array('id' => $jadwal_konsultasi->id));
     } else {
       show_404();
     }
-    $no_antrian = $this->db->query('SELECT id FROM no_antrian WHERE id_jadwal_konsultasi = ' . $id_jadwal_konsultasi)->row();
+    $no_antrian = $this->db->query('SELECT id FROM no_antrian WHERE id_jadwal_konsultasi = ?'  ,[$id_jadwal_konsultasi])->row();
     if ($no_antrian) {
       $this->db->delete('no_antrian', array('id' => $no_antrian->id));
     }
 
-    $data_registrasi = $this->db->query('SELECT id FROM data_registrasi WHERE id = ' . $jadwal_konsultasi->id_registrasi);
+    $data_registrasi = $this->db->query('SELECT id FROM data_registrasi WHERE id = ?' , [$jadwal_konsultasi->id_registrasi]);
     if ($data_registrasi) {
       $this->db->delete('data_registrasi', array('id' => $jadwal_konsultasi->id_registrasi));
     }

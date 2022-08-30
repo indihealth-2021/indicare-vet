@@ -181,7 +181,7 @@
               <p class="py-2 font-12">Diagnosa</p>
               <div class="col-md-12" id="diagnosis">
                   <div class="form-group row">
-                    <select id='diagnosis' name='diagnosis' style="width: 100%">
+                    <select id='diagnosis_list' name='diagnosis' style="width: 100%">
                         <option value='0'>-- Pilih Diagnosa --</option>
                     </select>
                     <!-- <textarea class="form-control" rows="5" placeholder="diagnosa dokter" name="diagnosis"><?php //if($diagnosis){ echo $diagnosis->diagnosis; } 
@@ -209,6 +209,16 @@
                             </tr>
                          </thead>
                         <tbody id="listResep">
+                         <?php if(!empty($resep_obat_cart)): ?>
+                            <?php foreach($resep_obat_cart as $r): ?>
+                                <tr id="obat-<?= $r->resep_id ?>">
+                                    <td><?= $r->name ?></td>
+                                    <td><?= number_format($r->jumlah_obat) ?> <small><?= $r->satuan_obat ?></small></td>
+                                    <td><?= $r->keterangan ?></td>
+                                    <td><button class="btn btn-secondary" type="button" data-resep="<?= $r->resep_id ?>" delete-resep-obat><i class="fas fa-trash-alt"></i></button></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
@@ -384,10 +394,9 @@
                                     <label for="recipient-name" class="font-12 col-form-label">Pilih Obat </label> 
                                     <?php foreach ($list_obat as $obat) { ?>
                                         <div id="obat-<?php echo $obat->id ?>" style="display: none"><?php echo $obat->unit ?></div>
-                                    <?php } ?>
-                                    <select name="id_obat" id="obat" class="form-control 
-                                                    form-control-sm" onchange="obat_onchange();" required>
-                                        <option disabled selected value="">Pilih Obat</option>
+                                    <?php } ?><br>
+                                    <select style="width:100%" name="id_obat" id="obat" class="form-control" onchange="obat_onchange();" required>
+                                        <option  selected value="">Pilih Obat</option>
                                         <?php foreach ($list_obat as $obat) { ?>
                                             <option value="<?php echo $obat->id ?>"><?php echo $obat->name ?></option>
                                         <?php } ?>
@@ -446,6 +455,9 @@
 </div>
 
 <script>
+$(document).ready(function() {
+    $('#obat').select2({ dropdownParent: $("#ModalResep"),});
+});
 var data_obat;
         firebase
               .database()
@@ -480,13 +492,14 @@ var data_obat;
             //             endCall: 1,
             //           });
 
-             $('#formResepDokter').append($('#formKonsultasi').children())
-             $('#formResepDokter').append($('#formKonsultasi_2').children())
-             // $.ajax({
-             //        method : 'POST',
-             //        url    : baseUrl+"Conference/end_call",
-             //        data   : {reg: '<?php echo $id_registrasi ?>',id_pasien:<?php echo $pasien->id ?>, id_jadwal_konsultasi: <?= $id_jadwal_konsultasi ?> },
-             //        success : function(data){
+             $.ajax({
+                    method : 'POST',
+                    url    : baseUrl+"Conference/end_call",
+                    data   : {reg: '<?php echo $id_registrasi ?>',diagnosis:$('#diagnosis_list').val(),id_pasien:<?php echo $pasien->id ?>, id_jadwal_konsultasi: <?= $id_jadwal_konsultasi ?> },
+                    success : function(data){
+
+                     $('#formResepDokter').append($('#formKonsultasi').children())
+                     $('#formResepDokter').append($('#formKonsultasi_2').children())
                              $.ajax({
                             method : 'POST',
                             url    : baseUrl+'dokter/Teleconsultasi/send_data_konsultasi',
@@ -498,19 +511,22 @@ var data_obat;
                               .update({
                                 endCall: 1,
                               });
-                               // location.href = '<?= base_url('dokter/Teleconsultasi')?>';    
+                               location.href = '<?= base_url('dokter/Teleconsultasi')?>';    
                             },
                             error : function(request, status, error){
-                                console.log(request);
-                                console.log(status);
-                                console.log(error);
+                                 Swal.fire('Gagal mengirim data konsultasi.') 
                             }
                         });         
-                    // },
-                    // error : function(data){
-                    //      alert(data);
-                    // }        
-                    // });
+                    },
+                    error : function(error){
+                        //  Toast.fire({
+                        //   icon: 'error',
+                        //   title: error.responseJSON.message
+                        // })
+                          Swal.fire(error.responseJSON.message)
+                          console.log(error.responseJSON.message) 
+                    }        
+                    });
                
           } 
         })
@@ -758,6 +774,71 @@ var data_obat;
 
         satuan_show.placeholder = "Jml (" + satuan.innerHTML + ")";
         satuan_obat_hidden.value = satuan.innerHTML;
+    }
+
+    $('#formResepDokter').submit(function(e){
+         e.preventDefault();
+
+        var formdata = new FormData();
+        var listResep = $("#listResep");
+        formdata.append('id_obat',$('#obat').val());
+        formdata.append('jumlah_obat',$('input[name=jumlah_obat]').val());
+        formdata.append('id_pasien',$('input[name=id_pasien]').val());
+        formdata.append('id_dokter','<?php echo $user->id ?>');
+        formdata.append('id_jadwal_konsultasi',$('input[name=id_jadwal_konsultasi]').val());
+        formdata.append('keterangan',$('input[name=keterangan]').val());
+        formdata.append('satuan_obat',$('input[name=satuan_obat]').val());
+        axios.post(baseUrl+'/Dokter/Teleconsultasi/cartResep', formdata)
+          .then(function (response) {
+
+             var templateListResep = '<tr id=obat-'+response.data.resep_id+'><td>'+response.data.name+'</td><td>'+response.data.jumlah_obat+' <small>'+response.data.satuan_obat+'</small></td><td>'+response.data.keterangan+'</td><td><button class=\'btn btn-secondary\' type=\'button\' delete-resep-obat data-resep='+response.data.resep_id+' ><i class=\'fas fa-trash-alt\'></i></button></td></tr>';
+            listResep.append(templateListResep);
+            $('#formResepDokter')[0].reset();
+            $('#ModalResep').modal('hide')
+            
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    });
+
+    $("[delete-resep-obat]").click(function(){
+        var id =  $(this).data('resep');
+        Swal.fire({
+          title: 'Hapus Resep Obat Ini?',
+          
+          showCancelButton: true,
+          confirmButtonText: 'Hapus',
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            if(deleteResep(id,this)){
+
+            }
+               
+          } 
+        })
+        
+    })
+
+    function deleteResep(id,rm)
+    {
+        var formdata = new FormData();
+        formdata.append('resep_id',id);
+        axios.post(baseUrl+'/Dokter/Teleconsultasi/deleteResep', formdata)
+          .then(function (response) {
+             (rm.parentNode).parentNode.remove();
+             Toast.fire({
+              icon: 'success',
+              title: response.data.message
+            })
+             return true;
+            
+          })
+          .catch(function (error) {
+            console.log(error);
+            return false;
+          });
     }
 </script>
 <div class="sidebar-overlay" data-reff=""></div>

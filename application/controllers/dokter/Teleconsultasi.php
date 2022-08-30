@@ -14,7 +14,83 @@ class Teleconsultasi extends CI_Controller
         $this->load->library(array('Key'));
         $this->load->library('session');
     }
+    public function deleteResep()
+    {
+         header('Content-Type: application/json');
+         $this->load->library('form_validation');
+        $this->form_validation->set_rules('resep_id', 'ID Jadwal Konsultasi', 'required');
+        if(!$this->form_validation->run())
+          {
+            $array = array(
+                'error'   => true,
+               );
+              echo json_encode($array);
+              exit();
+          }
 
+          $this->db->where('id', $this->input->post('resep_id'));
+          $this->db->where('id_dokter', $this->session->userdata('id_user'));
+          $this->db->delete('resep_obat_cart');
+
+          // var_dump($this->db->last_query());
+
+          echo json_encode(['error' => false, 'message' => "Berhasil menghapus resep"]);
+          
+    }
+
+    public function cartResep()
+    {   
+        
+         $this->load->library('form_validation');
+          $this->form_validation->set_rules('id_jadwal_konsultasi', 'ID Jadwal Konsultasi', 'required');
+          $this->form_validation->set_rules('id_pasien', 'Pasien', 'required');
+          $this->form_validation->set_rules('id_dokter', 'Dokter', 'required');
+          $this->form_validation->set_rules('id_obat', 'Obat', 'required');
+          $this->form_validation->set_rules('jumlah_obat', 'Jumlah Obat', 'required');
+          $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
+          if(!$this->form_validation->run())
+          {
+            $array = array(
+                'error'   => true,
+                'name_error' => form_error('name'),
+                'email_error' => form_error('email'),
+                'subject_error' => form_error('subject'),
+                'message_error' => form_error('message')
+               );
+              echo json_encode($array);
+              exit();
+          }                   
+        $data = array(
+                'id_jadwal_konsultasi' => $this->input->post('id_jadwal_konsultasi'),
+                'id_pasien' => $this->input->post('id_pasien'),
+                'id_dokter' => $this->session->userdata('id_user'),
+                'id_obat' => $this->input->post('id_obat'),
+                'jumlah_obat' => $this->input->post('jumlah_obat'),
+                'keterangan' => $this->input->post('keterangan'),
+        );
+        // var_dump($this->input->post());
+        // exit();
+        $this->db->insert('resep_obat_cart', $data);
+        $id = $this->db->insert_id();
+        $this->db->select(' master_obat.id as master_id,
+                            resep_obat_cart.id as resep_id,
+                            master_obat.name as name,
+                            master_obat.unit as satuan_obat,
+                            resep_obat_cart.jumlah_obat as jumlah_obat,
+                            resep_obat_cart.keterangan as keterangan'
+                        );
+        $this->db->from('resep_obat_cart');
+        $this->db->join('master_obat', 'master_obat.id = resep_obat_cart.id_obat');
+        $q = $this->db->where(array('resep_obat_cart.id' => $id))->get();
+
+
+        $arr = $q->row();
+        // var_dump($arr); exit();
+        $obj = ['id' => $arr->resep_id,'name' => $arr->name,'jumlah_obat' => number_format($arr->jumlah_obat),'keterangan' =>$arr->keterangan,'satuan_obat' => $arr->satuan_obat];
+         header('Content-Type: application/json');
+        
+        echo json_encode( $obj);
+    }
     public function index()
     {
         if (!$this->session->userdata('is_login')) {
@@ -335,19 +411,33 @@ class Teleconsultasi extends CI_Controller
 
         $data_history = array("activity" => "Diagnosis", "id_user" => $this->session->userdata('id_user'), "target_id_user" => $data['id_pasien']);
         $this->db->insert('data_history_log_dokter', $data_history);
-
-        $jml_data_resep = count($data['obat']);
-        for ($i = 0; $i < $jml_data_resep; $i++) {
-            $obat = $this->db->query('SELECT harga_per_n_unit, harga FROM master_obat WHERE id = '.$data['id_obat'][$i])->row();
+        $this->db->select('master_obat.id as master_id,
+                            resep_obat_cart.id as resep_id,
+                            resep_obat_cart.id_dokter as id_dokter,
+                            resep_obat_cart.id_pasien as id_pasien,
+                            master_obat.name as name,
+                            master_obat.unit as satuan_obat,
+                            resep_obat_cart.jumlah_obat as jumlah_obat,
+                            resep_obat_cart.keterangan as keterangan,
+                            resep_obat_cart.id_jadwal_konsultasi as id_jadwal_konsultasi,
+                            master_obat.harga_per_n_unit as harga_per_n_unit,
+                            master_obat.harga as harga,
+                            resep_obat_cart.keterangan as keterangan,
+                            ');
+        $this->db->from('resep_obat_cart');
+        $this->db->join('master_obat', 'master_obat.id = resep_obat_cart.id_obat');
+        $resep = $this->db->where(array('id_jadwal_konsultasi' =>  $data['id_jadwal_konsultasi']))->get()->result();
+        foreach($resep as $r){
+            
             $data_resep = array(
-                "id_jadwal_konsultasi" => $data['id_jadwal_konsultasi'],
-                "id_pasien" => $data['id_pasien'],
-                "id_dokter" => $id_dokter,
-                "id_obat" => $data['id_obat'][$i],
-                "jumlah_obat" => $data['jumlah_obat'][$i],
-                "harga_per_n_unit" => $obat->harga_per_n_unit,
-                "harga" => $obat->harga,
-                "keterangan" => $data['keterangan'][$i],
+                "id_jadwal_konsultasi" => $r->id_jadwal_konsultasi,
+                "id_pasien" => $r->id_pasien,
+                "id_dokter" => $r->id_dokter,
+                "id_obat" => $r->master_id,
+                "jumlah_obat" => $r->jumlah_obat,
+                "harga_per_n_unit" => $r->harga_per_n_unit,
+                "harga" => $r->harga,
+                "keterangan" => $r->keterangan,
             );
             $this->db->insert('resep_dokter', $data_resep);
         }
@@ -372,6 +462,7 @@ class Teleconsultasi extends CI_Controller
         }
         $id_pasien = $this->input->get('id_pasien');
         $id_jadwal_konsultasi = $this->input->get('id_jadwal_konsultasi');
+        // var_dump($id_jadwal_konsultasi);exit();
         $data['id_jadwal_konsultasi'] = $id_jadwal_konsultasi;
         $jadwal_konsultasi = $this->db->query('SELECT id,id_registrasi FROM jadwal_konsultasi WHERE id = ' . $id_jadwal_konsultasi)->row();
         $data['id_registrasi'] = $jadwal_konsultasi->id_registrasi;
@@ -399,6 +490,17 @@ class Teleconsultasi extends CI_Controller
         $data['pasien']->age = $birthDate->diff($now)->y;
         $data['user'] = $this->all_model->select('master_user', 'row', 'id = ' . $this->session->userdata('id_user'));
         $data['title'] = 'Telekonsultasi';
+        $this->db->select('master_obat.id as master_id,
+                            resep_obat_cart.id as resep_id,
+                            master_obat.name as name,
+                            master_obat.unit as satuan_obat,
+                            resep_obat_cart.jumlah_obat as jumlah_obat,
+                            resep_obat_cart.keterangan as keterangan
+                            ');
+        $this->db->from('resep_obat_cart');
+        $this->db->join('master_obat', 'master_obat.id = resep_obat_cart.id_obat');
+        $data['resep_obat_cart'] = $this->db->where(array('id_jadwal_konsultasi' =>  $id_jadwal_konsultasi))->get()->result();
+        // echo $this->db->last_query(); exit();
         $data['css_addons'] = '
           <link rel="stylesheet" href="' . base_url('assets/adminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') . '"><link rel="stylesheet" href="' . base_url('assets/adminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') . '">
           <script src="https://meet.jit.si/external_api.js"></script>
@@ -449,26 +551,26 @@ $(document).ready(function() {
         alert('aa');
         })
         dataobat_ls =[];
-    $('#formResepDokter').submit(function(e){
-         e.preventDefault();
-        var dataResep = $(this).serializeArray();
-        var namaObat = $('select[name=id_obat] option:selected').text();
-        var listResep = $('#listResep');
-        var countTr = $('#listResep tr');
-        countTr = countTr.length;
-        if(countTr == null){
-            countTr = 0;
-        }
-        countTr+=1;
-        var templateListResep = '<tr><td>'+namaObat+'</td><td>'+dataResep[2].value+' '+dataResep[4].value+'</td><td>'+dataResep[3].value+'</td><td><button class=\'btn btn-secondary\' type=\'button\' hapus-obat onclick=\'return (this.parentNode).parentNode.remove();\' ><i class=\'fas fa-trash-alt\'></i></button></td><input type=\'hidden\' name=\''+dataResep[0].name+'[]\' value=\''+dataResep[0].value+'\'><input type=\'hidden\' name=\''+dataResep[1].name+'[]\' value=\''+dataResep[1].value+'\'><input type=\'hidden\' name=\''+dataResep[2].name+'[]\' value=\''+dataResep[2].value+'\'><input type=\'hidden\' name=\''+dataResep[3].name+'[]\' value=\''+dataResep[3].value+'\'></tr>';
-        listResep.append(templateListResep);
-        $(this)[0].reset();
-        $('#ModalResep').modal('hide');
-        alert('Resep telah ditambahkan!');
-        dataobat_ls.push(dataResep)
-        console.log(dataobat_ls);
+    // $('#formResepDokter').submit(function(e){
+    //      e.preventDefault();
+    //     var dataResep = $(this).serializeArray();
+    //     var namaObat = $('select[name=id_obat] option:selected').text();
+    //     var listResep = $('#listResep');
+    //     var countTr = $('#listResep tr');
+    //     countTr = countTr.length;
+    //     if(countTr == null){
+    //         countTr = 0;
+    //     }
+    //     countTr+=1;
+    //     var templateListResep = '<tr><td>'+namaObat+'</td><td>'+dataResep[2].value+' '+dataResep[4].value+'</td><td>'+dataResep[3].value+'</td><td><button class=\'btn btn-secondary\' type=\'button\' hapus-obat onclick=\'return (this.parentNode).parentNode.remove();\' ><i class=\'fas fa-trash-alt\'></i></button></td><input type=\'hidden\' name=\''+dataResep[0].name+'[]\' value=\''+dataResep[0].value+'\'><input type=\'hidden\' name=\''+dataResep[1].name+'[]\' value=\''+dataResep[1].value+'\'><input type=\'hidden\' name=\''+dataResep[2].name+'[]\' value=\''+dataResep[2].value+'\'><input type=\'hidden\' name=\''+dataResep[3].name+'[]\' value=\''+dataResep[3].value+'\'></tr>';
+    //     listResep.append(templateListResep);
+    //     $(this)[0].reset();
+    //     $('#ModalResep').modal('hide');
+    //     alert('Resep telah ditambahkan!');
+    //     dataobat_ls.push(dataResep)
+    //     console.log(dataobat_ls);
        
-    });
+    // });
    
     $('select[name=diagnosis]').select2({
           ajax: {

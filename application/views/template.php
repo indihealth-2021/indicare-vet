@@ -32,6 +32,7 @@
   <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-messaging.js"></script>
     <script src="<?php echo base_url('assets/dashboard/js/jquery-3.2.1.min.js'); ?>"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
  baseUrl = '<?php echo base_url(); ?>';
 
@@ -52,6 +53,18 @@
 
     };
     firebase.initializeApp(firebaseConfig);
+    const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
   </script>
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dashboard/css/bootstrap-datetimepicker.min.css'); ?>">
 
@@ -522,8 +535,8 @@
             }
           },
           error: function(data) {
-            console.log(data);
-            alert('Terjadi kesalahan firebase, refresh kembali browser anda.');
+            // console.log(data);
+            // alert('Terjadi kesalahan firebase, refresh kembali browser anda.');
           }
 
 
