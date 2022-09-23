@@ -134,7 +134,7 @@
           <div class="col-lg-3">
             <p class="font-12 text-powered">Powered By</p>
             <div class="row">
-              <img src="<?php echo base_url('assets/telemedicine/img/logo.png') ?>" class="ml-4 img-logo-footer">
+              <img src="<?php echo base_url('assets/telemedicine/img/logo-black.png') ?>" style="width: 100px !important; height: auto !important;" class="ml-4 ">
             </div>
           </div>
           <div class="col-lg-3">

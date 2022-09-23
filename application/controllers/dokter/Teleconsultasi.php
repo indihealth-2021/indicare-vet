@@ -187,7 +187,7 @@ class Teleconsultasi extends CI_Controller
         $page =  (empty($pg) ? 0 : $pg);
         $limit = $page * $page_lim;
         $cnt = $this->db->query("select id from master_diagnosa WHERE aktif = 1")->result();
-        $filteredValues = $this->db->query("select id, nama as text FROM master_diagnosa WHERE aktif = 1 AND nama LIKE '%" . $searchTerm . "%' LIMIT $limit , $page_lim ;")->result_array();
+        $filteredValues = $this->db->query("select id, concat('(',id,') ',nama) as text FROM master_diagnosa WHERE aktif = 1 AND nama LIKE '%" . $searchTerm . "%' OR id LIKE '".$searchTerm."%' LIMIT $limit , $page_lim ;")->result_array();
 
         echo json_encode(array(
             'incomplete_results' => false,

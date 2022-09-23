@@ -23,20 +23,20 @@
         <div class="d-inline-flex">
             <div class="col-md-2 mb-5">
                 <div class="invoice-logo">
-                    <img src="<?php echo base_url('assets/telemedicine/img/logo.png');?>" width="120" height="auto" alt="logo">
+                    <img src="<?php echo base_url('assets/dashboard/img/logo.png');?>" width="120" height="auto" alt="logo">
                 </div>
             </div>
             <div class="col-md-8 text-center" align="center">
                 <p class="text-black">
-                <h4><strong>Rumah Sakit Telemedicine</strong></h4></br>
-                <h5>Menara Thamrin 12th Floor, Jl. M.H Thamrin Kav.3 Jakarta 10250</h5>
-                <h5>Telp. (021) 230 2347, +6221 230 2345, Fax. 6221 230 3567, info@lintasarta.co.id</h5>
-                <h5>Central Jakarta</h5>
+                <h4><strong>Puskesmas Dago</strong></h4></br>
+                <h5>Jl. Ir. H. Juanda No.360, Dago, Kec. Coblong, Kota Bandung, 40135</h5>
+                <h5>Telp. (022) 253 3539</h5>
+                <h5>Kota Bandung</h5>
                 </p>
             </div>
             <div class="col-md-2 text-right" align="right">
                 <div class="invoice-logo">
-                    <img src="<?php echo base_url('assets/telemedicine/img/logo.png');?>" width="120" height="auto" alt="logo">
+                    <img src="<?php echo base_url('assets/dashboard/img/logo.png');?>" width="120" height="auto" alt="logo">
                 </div>
             </div>
         </div>

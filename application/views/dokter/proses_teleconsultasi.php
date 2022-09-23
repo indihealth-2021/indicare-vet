@@ -788,7 +788,7 @@ var data_obat;
         formdata.append('id_jadwal_konsultasi',$('input[name=id_jadwal_konsultasi]').val());
         formdata.append('keterangan',$('input[name=keterangan]').val());
         formdata.append('satuan_obat',$('input[name=satuan_obat]').val());
-        axios.post(baseUrl+'/Dokter/Teleconsultasi/cartResep', formdata)
+        axios.post(baseUrl+'dokter/Teleconsultasi/cartResep', formdata)
           .then(function (response) {
 
              var templateListResep = '<tr id=obat-'+response.data.resep_id+'><td>'+response.data.name+'</td><td>'+response.data.jumlah_obat+' <small>'+response.data.satuan_obat+'</small></td><td>'+response.data.keterangan+'</td><td><button class=\'btn btn-secondary\' type=\'button\' delete-resep-obat data-resep='+response.data.resep_id+' ><i class=\'fas fa-trash-alt\'></i></button></td></tr>';

@@ -79,7 +79,7 @@
           <div class="form-group">
             <button class="btn btn-tele form-control">Tampilkan</button>
           </div>
-        </div>
+        </div> 
         <div class="col-sm-6 text-right">
           <div class="form-group">
             <div class="dropdown">
@@ -96,6 +96,11 @@
                 <li class="dropdown-item"><a class="btn btn-default btn-block" href="<?php echo base_url('admin/Invoice/export_to_excel_telekonsultasi/?from=' . $from . '&to=' . $to . '&poli=' . $poli . '&dokter=' . $dokter); ?>">Excel</a></li>
               </ul>
             </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            TOTAL : <?= $total_konsultasi ?>
           </div>
         </div>
       </div>

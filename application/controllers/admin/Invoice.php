@@ -1369,6 +1369,7 @@ class Invoice extends CI_Controller
         $data['uri_segment'] = $this->uri->segment(4);
         $limit = ' LIMIT '.$config['per_page'].' OFFSET '.$data['page'];
 
+        $data['total_konsultasi'] = count($this->_get_telekonsultasi($dokter, $poli, $tanggal_konsultasi, ''));
         $data['list_pembayaran_konsultasi'] = $this->_get_telekonsultasi($dokter, $poli, $tanggal_konsultasi, $limit);
         $data['pagination'] = $this->pagination->create_links();
         $data['list_poli'] = $this->db->query('SELECT DISTINCT 
@@ -1530,7 +1531,7 @@ class Invoice extends CI_Controller
         $data['view'] = 'admin/pdf_invoice_telekonsultasi';
         $data['title'] = 'Laporan Telekonsultasi';
         $this->pdf->setPaper('A4', 'landscape');
-        $this->pdf->filename = "Invoice Telekonsultasi Telemedicine Lintasarta" . $tanggal_konsultasi_id . ".pdf";
+        $this->pdf->filename = "Invoice Telekonsultasi Indicare Indihealth" . $tanggal_konsultasi_id . ".pdf";
         $this->pdf->load_view('template_invoice', $data);
     }
 
@@ -1670,9 +1671,9 @@ class Invoice extends CI_Controller
             )
         );
 
-        $excel->getProperties()->setCreator('Telemedicine Lintasarta')
-            ->setLastModifiedBy('Telemedicine Lintasarta')
-            ->setTitle('Invoice Telekonsultasi Telemedicine Lintasarta');
+        $excel->getProperties()->setCreator('Telemedicine Indihealth')
+            ->setLastModifiedBy('Telemedicine Indihealth')
+            ->setTitle('Invoice Telekonsultasi  Indihealth');
 
         $excel->setActiveSheetIndex(0)->setCellValue('A1', 'Laporan Telekonsultasi');
         $excel->getActiveSheet()->mergeCells('A1:K2');
