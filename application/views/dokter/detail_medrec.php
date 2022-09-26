@@ -19,6 +19,14 @@
       <div class="row">
         <div class="col-md-12">
           <p class="text-center font-24 mb-5 pt-4"><u><b>REKAM MEDIS</b></u></p> 
+          <div class="row">
+            <div class="col-md-6" align="left">
+              <a href="<?= base_url('dokter/CetakResep/cetak/'.$id_jadwal_konsultasi.'/'.$id_pasien) ?>" target="_blank" class="btn btn-primary"><i class="fas fa-print" ></i> Cetak Resep</a>
+            </div>
+            <div class="col-md-6">
+            </div>  
+          </div>
+          <hr>
           <div class="row font-14 font-bold-7">
             <div class="col-md-6">
               <div class="form-group row">
@@ -95,7 +103,11 @@
                   ?>
                   <label class="col-md-2 col-4">Resep Obat</label>
                   <div class="col-md-10 col-10">
-                      <?php echo $rekam_medis->list_obat ? '<ol>'.$rekam_medis->list_obat.'</ol>' : '<p>: -</p>' ?>
+                     <ol>
+                     <?php foreach ($resep_obat as $ro): ?>
+                       <li><?= $ro->name ?>  (<?= $ro->jumlah_obat." ". $ro->unit ?>) (<?= $ro->keterangan ?>)</li>
+                     <?php endforeach; ?>
+                    </ol>
                   </div>
                   <?php if($rekam_medis->order_status != null){ ?>
                       <label class="col-md-2 col-4">Order Status</label>

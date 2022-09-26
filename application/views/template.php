@@ -33,6 +33,26 @@
     <script src="<?php echo base_url('assets/dashboard/js/jquery-3.2.1.min.js'); ?>"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<style type="text/css">
+    .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background-color: rgba(0, 0, 0, 0.83)
+      }
+      .preloader .loading {
+        position: absolute;
+        color:  #FFF;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        font: 14px;
+      }
+  </style>
+    
   <script>
  baseUrl = '<?php echo base_url(); ?>';
 

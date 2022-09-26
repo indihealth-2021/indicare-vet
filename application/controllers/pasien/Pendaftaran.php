@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+use Ramsey\Uuid\Uuid;
 
 class Pendaftaran extends CI_Controller {
 	public $data;
@@ -96,7 +97,7 @@ class Pendaftaran extends CI_Controller {
         if(!$this->session->userdata('is_login')){
             redirect(base_url('Login'));
         }
-        $valid = $this->db->query('SELECT id_user_kategori FROM master_user WHERE id = '.$this->session->userdata('id_user'))->row();
+        $valid = $this->db->query('SELECT id_user_kategori FROM master_user WHERE id = ?',[$this->session->userdata('id_user')])->row();
         if($valid->id_user_kategori != 0){
             if($valid->id_user_kategori == 2){
                 redirect(base_url('dokter/Dashboard'));
@@ -110,7 +111,7 @@ class Pendaftaran extends CI_Controller {
 		if(!$id_jadwal){
 			show_404();
 		}
-        $jadwal_dokter = $this->db->query('SELECT jadwal_dokter.id, jadwal_dokter.hari, jadwal_dokter.tanggal, jadwal_dokter.waktu, detail_dokter.id_poli FROM jadwal_dokter INNER JOIN master_user dokter ON jadwal_dokter.id_dokter = dokter.id INNER JOIN detail_dokter ON detail_dokter.id_dokter = dokter.id WHERE jadwal_dokter.id = '.$id_jadwal)->row();
+        $jadwal_dokter = $this->db->query('SELECT jadwal_dokter.id, jadwal_dokter.hari, jadwal_dokter.tanggal, jadwal_dokter.waktu, detail_dokter.id_poli FROM jadwal_dokter INNER JOIN master_user dokter ON jadwal_dokter.id_dokter = dokter.id INNER JOIN detail_dokter ON detail_dokter.id_dokter = dokter.id WHERE jadwal_dokter.id = ?',[$id_jadwal])->row();
 
         if($jadwal_dokter->tanggal){
             $tanggal_jadwal_dokter = new DateTime($jadwal_dokter->tanggal);
@@ -149,7 +150,7 @@ class Pendaftaran extends CI_Controller {
         }
         // $hari_dokter = new DateTime($hari_dokter);
         $spare_waktu_jd = explode('-', str_replace(' ', '', $jadwal_dokter->waktu));
-        $jadwal_konsultasi = $this->db->query('SELECT jk.jam,jk.tanggal FROM jadwal_konsultasi jk INNER JOIN data_registrasi dreg ON jk.id_registrasi = dreg.id INNER JOIN jadwal_dokter jd ON dreg.id_jadwal = jd.id WHERE jd.id = '.$jadwal_dokter->id.' ORDER BY jk.created_at DESC LIMIT 1')->row();
+        $jadwal_konsultasi = $this->db->query('SELECT jk.jam,jk.tanggal FROM jadwal_konsultasi jk INNER JOIN data_registrasi dreg ON jk.id_registrasi = dreg.id INNER JOIN jadwal_dokter jd ON dreg.id_jadwal = jd.id WHERE jd.id = ? ORDER BY jk.created_at DESC LIMIT 1',[$jadwal_dokter->id])->row();
         // echo var_dump($hari_dokter.' '.$spare_waktu_jd[0]);
         // die;
         $jam_awal = new DateTime($hari_dokter.' '.$spare_waktu_jd[0]);
@@ -176,7 +177,7 @@ class Pendaftaran extends CI_Controller {
             $last_jam_konsultasi->modify('+30 minutes');
             // echo var_dump($last_jam_konsultasi);
             // die;
-            $list_registrasi = $this->db->query('SELECT bukti_pembayaran.id FROM bukti_pembayaran INNER JOIN data_registrasi ON data_registrasi.id = bukti_pembayaran.id_registrasi WHERE data_registrasi.id_jadwal = '.$id_jadwal.' AND bukti_pembayaran.status = 0')->result();
+            $list_registrasi = $this->db->query('SELECT bukti_pembayaran.id FROM bukti_pembayaran INNER JOIN data_registrasi ON data_registrasi.id = bukti_pembayaran.id_registrasi WHERE data_registrasi.id_jadwal = ? AND bukti_pembayaran.status = 0',[$id_jadwal])->result();
             foreach($list_registrasi as $registrasi){
                 $diff_spare_last = $last_jam_konsultasi->diff($jam_terakhir);
                 if($diff_spare_last->h == 0 && $diff_spare_last->i < 30){
@@ -246,7 +247,7 @@ class Pendaftaran extends CI_Controller {
             //     redirect(base_url('pasien/Pendaftaran?poli=&hari=all'));
             // }
         }
-        $list_registrasi = $this->db->query('SELECT bukti_pembayaran.id FROM bukti_pembayaran INNER JOIN data_registrasi ON data_registrasi.id = bukti_pembayaran.id_registrasi WHERE data_registrasi.id_jadwal = '.$id_jadwal.' AND bukti_pembayaran.status = 0')->result();
+        $list_registrasi = $this->db->query('SELECT bukti_pembayaran.id FROM bukti_pembayaran INNER JOIN data_registrasi ON data_registrasi.id = bukti_pembayaran.id_registrasi WHERE data_registrasi.id_jadwal = ? AND bukti_pembayaran.status = 0',[$id_jadwal])->result();
         foreach($list_registrasi as $registrasi){
             $diff_spare_last = $jam_awal->diff($jam_terakhir);
             if($diff_spare_last->h == 0 && $diff_spare_last->i < 30){
@@ -302,16 +303,16 @@ class Pendaftaran extends CI_Controller {
         if(!$id_jadwal){
             show_404();   
         }
-        $jadwal = $this->db->query('SELECT * FROM jadwal_dokter WHERE id = '.$id_jadwal)->row();
+        $jadwal = $this->db->query('SELECT * FROM jadwal_dokter WHERE id = ?',[$id_jadwal])->row();
 
         if(!$jadwal){
             show_404();
         }
 
-        $dokter = $this->db->query('SELECT * FROM master_user WHERE id = '.$jadwal->id_dokter)->row();
+        $dokter = $this->db->query('SELECT * FROM master_user WHERE id = ?',[$jadwal->id_dokter])->row();
          
         // Menambah data untuk table pendaftaran
-        $pasien = $this->db->query('SELECT * FROM master_user WHERE id = '.$id_pasien)->row();
+        $pasien = $this->db->query('SELECT * FROM master_user WHERE id = ?',[$id_pasien])->row();
 
         // $data_pendaftaran = array('id_pasien'=>$id_pasien, 'id_jadwal'=>$id_jadwal);
         // $daftar = $this->db->insert('pendaftaran',$data_pendaftaran);        
@@ -349,10 +350,11 @@ class Pendaftaran extends CI_Controller {
         // Menambah data untuk table data_registrasi
 //        $id_registrasi = 'REG-'.$daftar_id.'-'.$id_pasien;
 	// $now = (new DateTime('now'))->format('YmdHis');
-    $now = (new DateTime('now'))->format('ymd');
-	// $id_registrasi = $pasien->id_fasyankes.'-'.$new_num.'-'.$now;
+     $now = time();
+    // $id_registrasi = $pasien->id_fasyankes.'-'.$new_num.'-'.$now;
     $id_jadwal_for_id_registrasi = str_pad((string) $id_jadwal, 3, "0", STR_PAD_LEFT);
-    $id_registrasi = $now.$id_jadwal_for_id_registrasi.$new_num_regid;
+    $uuid = Uuid::uuid5(Uuid::NAMESPACE_URL, $now.$this->session->userdata('id_user').$jadwal->id_dokter.$id_jadwal_for_id_registrasi.$new_num_regid);
+    $id_registrasi = $uuid;
         $id_status_pembayaran = 0;
         $keterangan = 'Belum Bayar';
         $id_fasyankes = $pasien->id_fasyankes;        

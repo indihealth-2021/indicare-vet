@@ -1,3 +1,9 @@
+ <div class="preloader" style="display: none;">
+      <div class="loading" align="center">
+        <i class="fas fa-pulse fa-2x fa-spinner"></i>
+        <p style="margin-top:10px;">Mohon tunggu, sedang mengalihkan halaman...</p>
+      </div>
+    </div>
 <!-- Main content -->
   <div class="page-wrapper">
     <div class="content">
@@ -199,7 +205,7 @@
               </div>
               <div class="row">
                 <div class="table-responsive p-3">
-                    <table class="table table-border table-hover custom-table mb-0">
+                    <table id="listResephead" class="table table-border table-hover custom-table mb-0">
                         <thead class="font-12">
                             <tr class="text-abu">
                                 <td>Nama Obat</td>
@@ -215,7 +221,7 @@
                                     <td><?= $r->name ?></td>
                                     <td><?= number_format($r->jumlah_obat) ?> <small><?= $r->satuan_obat ?></small></td>
                                     <td><?= $r->keterangan ?></td>
-                                    <td><button class="btn btn-secondary" type="button" data-resep="<?= $r->resep_id ?>" delete-resep-obat><i class="fas fa-trash-alt"></i></button></td>
+                                    <td><button class="btn btn-secondary" type="button" onclick="deleteObatAct(<?= $r->resep_id ?>,this)"><i class="fas fa-trash-alt"></i></button></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -491,7 +497,7 @@ var data_obat;
             //           .update({
             //             endCall: 1,
             //           });
-
+            $('.preloader').fadeIn();
              $.ajax({
                     method : 'POST',
                     url    : baseUrl+"Conference/end_call",
@@ -523,6 +529,7 @@ var data_obat;
                         //   icon: 'error',
                         //   title: error.responseJSON.message
                         // })
+                        $('.preloader').fadeOut();
                           Swal.fire(error.responseJSON.message)
                           console.log(error.responseJSON.message) 
                     }        
@@ -791,8 +798,9 @@ var data_obat;
         axios.post(baseUrl+'dokter/Teleconsultasi/cartResep', formdata)
           .then(function (response) {
 
-             var templateListResep = '<tr id=obat-'+response.data.resep_id+'><td>'+response.data.name+'</td><td>'+response.data.jumlah_obat+' <small>'+response.data.satuan_obat+'</small></td><td>'+response.data.keterangan+'</td><td><button class=\'btn btn-secondary\' type=\'button\' delete-resep-obat data-resep='+response.data.resep_id+' ><i class=\'fas fa-trash-alt\'></i></button></td></tr>';
-            listResep.append(templateListResep);
+            //  var templateListResep = '<tr id=obat-'+response.data.resep_id+'><td>'+response.data.name+'</td><td>'+response.data.jumlah_obat+' <small>'+response.data.satuan_obat+'</small></td><td>'+response.data.keterangan+'</td><td><button class=\'btn btn-secondary\' type=\'button\' delete-resep-obat data-resep='+response.data.resep_id+' ><i class=\'fas fa-trash-alt\'></i></button></td></tr>';
+            // listResep.append(templateListResep);
+             $("#listResephead").load(location.href + " #listResephead");
             $('#formResepDokter')[0].reset();
             $('#ModalResep').modal('hide')
             
@@ -802,7 +810,7 @@ var data_obat;
           });
     });
 
-    $("[delete-resep-obat]").click(function(){
+     function deleteObatAct(id,element){
         var id =  $(this).data('resep');
         Swal.fire({
           title: 'Hapus Resep Obat Ini?',
@@ -812,14 +820,14 @@ var data_obat;
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
-            if(deleteResep(id,this)){
+            if(deleteResep(id,element)){
 
             }
                
           } 
         })
         
-    })
+    }
 
     function deleteResep(id,rm)
     {
