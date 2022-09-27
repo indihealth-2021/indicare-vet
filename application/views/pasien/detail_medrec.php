@@ -16,6 +16,9 @@
       </div>
 
       <div class="row">
+         <div class="col-md-6" align="left">
+              <a href="<?= base_url('pasien/CetakResep/cetak/'.$id_jadwal_konsultasi.'/'.$id_pasien) ?>" target="_blank" class="btn btn-primary"><i class="fas fa-print" ></i> Cetak Resep</a>
+            </div>
         <div class="col-md-12">
           <p class="text-center font-24 mb-5 pt-4"><u><b>REKAM MEDIS</b></u></p> 
           <div class="row font-14 font-bold-7">
