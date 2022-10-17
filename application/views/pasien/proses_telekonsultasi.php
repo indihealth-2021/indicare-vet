@@ -533,6 +533,15 @@
 
 
 <script type="text/javascript">
+    $(document).ready(function(){
+        firebase
+                  .database()
+                  .ref("panggilan/<?= md5($user->id) ?>")
+                  .update({
+                  
+                    joined: 1,
+                  }); 
+    })
     firebase.database().ref("panggilan/<?=  md5($user->id) ?>").on('value', function(snapshot) {
              firebase
               .database()
@@ -545,13 +554,7 @@
                    location.href = '<?= base_url('pasien/Pasien')?>';   
                    
                  }
-        // firebase
-        //           .database()
-        //           .ref("panggilan/<?= md5($pasien->id) ?>")
-        //           .update({
-                  
-        //             connected: 0,
-        //           }); 
+        
     })
     })
 

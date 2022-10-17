@@ -460,6 +460,7 @@
           
             time: Date.now(),
             closeCall: 1,
+            closePatient: 1,
             reject: 1,
             endCall: 0,
             accepted: 0,

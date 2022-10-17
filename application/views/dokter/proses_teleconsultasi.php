@@ -627,6 +627,11 @@ var data_obat;
                 {
                    $('#memanggil').modal('hide');
                    
+                 }
+                if(snapshot.val().closePatient == 1)
+                {
+                   $('#memanggil').modal('hide');
+                   
                  } 
                if(snapshot.val().reject == 1)
                 {
@@ -670,8 +675,10 @@ var data_obat;
             consult_room: baseUrl + 'pasien/Telekonsultasi/konsultasi/' + <?= $user->id ?> + '/' + <?php echo $id_jadwal_konsultasi ?>+ '/' +room_name ,
             closeCall: 0,
             endCall: 0,
+            closePatient: 0,
             accepted: 0,
             reject: 0,
+            joined: 0,
             connected: 0,
             roomName: room_name,
             id_jadwal_konsultasi: <?php echo $id_jadwal_konsultasi ?>,
