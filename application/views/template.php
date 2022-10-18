@@ -475,7 +475,7 @@
           .update({
           
             time: Date.now(),
-            closeCall: 1,
+            // closeCall: 1,
             reject: 0,
             endCall: 0,
             accepted: 1,
