@@ -669,7 +669,7 @@ var data_obat;
         firebase
           .database()
           .ref("panggilan/<?= md5($pasien->id); ?>")
-          .set({
+          .update({
             title: 'Panggilan dari <?= $user->name ?> ke <?= $pasien->name  ?>',
             call_From: 'Panggilan dari <?= $user->name ?>',
             calling: 1,
