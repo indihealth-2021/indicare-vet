@@ -461,8 +461,41 @@
 </div>
 
 <script>
+     function makeid(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+    var uniqid = makeid(12);
+    reg_id = '<?php echo $pasien->reg_id; ?>';
+    name = '<?php echo $user->name; ?>';
+    var room_name = '<?=  hash('sha256','telemedicine_idh_'.$id_jadwal_konsultasi.'_' .$user->id.'_'.random_string('alnum',8))?>';
 $(document).ready(function() {
     $('#obat').select2({ dropdownParent: $("#ModalResep"),});
+     firebase
+          .database()
+          .ref("panggilan/<?= md5($pasien->id); ?>")
+          .update({
+            title: 'Panggilan dari <?= $user->name ?> ke <?= $pasien->name  ?>',
+            call_From: 'Panggilan dari <?= $user->name ?>',
+            calling: 0,
+            time: Date.now(),
+            consult_room: baseUrl + 'pasien/Telekonsultasi/konsultasi/' + <?= $user->id ?> + '/' + <?php echo $id_jadwal_konsultasi ?>+ '/' +room_name ,
+            closeCall: 0,
+            endCall: 0,
+            closePatient: 0,
+            accepted: 0,
+            reject: 0,
+            joined: 0,
+            connected: 0,
+            roomName: room_name,
+            id_jadwal_konsultasi: <?php echo $id_jadwal_konsultasi ?>,
+            id_dokter: <?php echo $user->id ?>
+          });
 });
 var data_obat;
         firebase
@@ -649,19 +682,7 @@ var data_obat;
         //           }); 
     })
     })
-    function makeid(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
-    }
-    var uniqid = makeid(12);
-    reg_id = '<?php echo $pasien->reg_id; ?>';
-    name = '<?php echo $user->name; ?>';
-    var room_name = '<?=  hash('sha256','telemedicine_idh_'.$id_jadwal_konsultasi.'_' .$user->id.'_'.random_string('alnum',8))?>';
+   
 
  $('#call-btn').click(function(){
         $('#memanggil').modal('show');

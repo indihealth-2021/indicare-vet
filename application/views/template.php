@@ -426,7 +426,7 @@
                 if(snapshot.val().closeCall == 1)
                 {
                    $('#jawaban').modal('hide'); 
-                 } else{
+                 } else if(snapshot.val().calling == 1){
                    var audio = document.getElementById('bell-ring');
                   audio.play();
                    $('#jawaban').modal('show'); 
