@@ -516,6 +516,7 @@ var data_obat;
                               .ref("panggilan/<?= md5($pasien->id); ?>")
                               .update({
                                 endCall: 1,
+                                calling: 0,
                               });
                                location.href = '<?= base_url('dokter/Teleconsultasi')?>';    
                             },
@@ -671,6 +672,7 @@ var data_obat;
           .set({
             title: 'Panggilan dari <?= $user->name ?> ke <?= $pasien->name  ?>',
             call_From: 'Panggilan dari <?= $user->name ?>',
+            calling: 1,
             time: Date.now(),
             consult_room: baseUrl + 'pasien/Telekonsultasi/konsultasi/' + <?= $user->id ?> + '/' + <?php echo $id_jadwal_konsultasi ?>+ '/' +room_name ,
             closeCall: 0,
