@@ -426,7 +426,7 @@
                 if(snapshot.val().closeCall == 1)
                 {
                    $('#jawaban').modal('hide'); 
-                 } else if(snapshot.val().calling == 1){
+                 } else if(snapshot.val().calling == 1 && snapshot.val().accepted == 0){
                    var audio = document.getElementById('bell-ring');
                   audio.play();
                    $('#jawaban').modal('show'); 
@@ -475,7 +475,6 @@
           .update({
           
             time: Date.now(),
-            // closeCall: 1,
             reject: 0,
             endCall: 0,
             accepted: 1,

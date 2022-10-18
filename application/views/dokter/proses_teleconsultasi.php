@@ -480,22 +480,9 @@ $(document).ready(function() {
           .database()
           .ref("panggilan/<?= md5($pasien->id); ?>")
           .update({
-            title: 'Panggilan dari <?= $user->name ?> ke <?= $pasien->name  ?>',
-            call_From: 'Panggilan dari <?= $user->name ?>',
-            calling: 0,
-            time: Date.now(),
-            consult_room: baseUrl + 'pasien/Telekonsultasi/konsultasi/' + <?= $user->id ?> + '/' + <?php echo $id_jadwal_konsultasi ?>+ '/' +room_name ,
-            closeCall: 0,
-            endCall: 0,
-            closePatient: 0,
-            accepted: 0,
-            reject: 0,
-            joined: 0,
-            connected: 0,
-            roomName: room_name,
-            id_jadwal_konsultasi: <?php echo $id_jadwal_konsultasi ?>,
-            id_dokter: <?php echo $user->id ?>
-          });
+           
+            time: Date.now(),         
+             });
 });
 var data_obat;
         firebase
@@ -590,7 +577,7 @@ var data_obat;
     })
 </script>
 <script type="text/javascript">
-    
+    var accepted = 0;
      firebase.database().ref("assesment/<?= md5($pasien->id."_".$id_jadwal_konsultasi)?>").on('value', function(snapshot) {
              firebase
               .database()
@@ -655,6 +642,8 @@ var data_obat;
                  if(snapshot.val().accepted == 1)
                 {
                    $('#memanggil').modal('hide');
+                   accepted = 1;
+
                    
                  } 
                 if(snapshot.val().closeCall == 1)
@@ -712,24 +701,28 @@ var data_obat;
     function closeCall()
       {
          $('#memanggil').modal('hide'); 
-        firebase
-          .database()
-          .ref("panggilan/<?= md5($pasien->id); ?>")
-          .update({
-            title: 'Panggilan dari <?= $user->name ?> ke <?= $pasien->name  ?>',
-            time: Date.now(),
-            consult_room: baseUrl + 'pasien/Telekonsultasi/konsultasi/' + <?= $user->id ?> + '/' + <?php echo $id_jadwal_konsultasi ?>+ '/' +room_name ,
-            closeCall: 1,
-            endCall: 0,
-            accepted: 0,
-            // reject: 0,
-            // roomName: room_name,
-            id_jadwal_konsultasi: <?php echo $id_jadwal_konsultasi ?>,
-            id_dokter: <?php echo $user->id ?>
-          });
+         if(accepted != 1)
+         {
+            firebase
+              .database()
+              .ref("panggilan/<?= md5($pasien->id); ?>")
+              .update({
+                title: 'Panggilan dari <?= $user->name ?> ke <?= $pasien->name  ?>',
+                time: Date.now(),
+                consult_room: baseUrl + 'pasien/Telekonsultasi/konsultasi/' + <?= $user->id ?> + '/' + <?php echo $id_jadwal_konsultasi ?>+ '/' +room_name ,
+                closeCall: 1,
+                endCall: 0,
+                accepted: 0,
+                // reject: 0,
+                // roomName: room_name,
+                id_jadwal_konsultasi: <?php echo $id_jadwal_konsultasi ?>,
+                id_dokter: <?php echo $user->id ?>
+              });
+        }
       }
 
       $('#memanggil').on('hidden.bs.modal', function () {
+        // alert(accepted)
             closeCall()
         });
 
