@@ -479,8 +479,8 @@ $(document).ready(function() {
      firebase
           .database()
           .ref("panggilan/<?= md5($pasien->id); ?>")
-          .update({
-           
+          .set({
+           calling: 0,
             time: Date.now(),         
              });
 });
