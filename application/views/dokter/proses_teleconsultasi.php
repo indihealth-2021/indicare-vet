@@ -729,7 +729,7 @@ var data_obat;
     
     document.getElementById("user-call").value = '<?php echo $pasien->id ?>';
     var userName = name;
-    const domain = 'telekonsultasi2.telemedical.id';
+    const domain = 'meet.jit.si';
     const options = {
         roomName: room_name,
         width: 535,

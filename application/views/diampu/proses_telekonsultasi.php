@@ -260,7 +260,7 @@
     var room_name = 'telemedicine_lintas_' + <?php echo $pengampu->id ?> + '_' + <?php echo $user->id ?> + '_' + uniqid;
     document.getElementById("user-call").value = '<?php echo $pengampu->id ?>';
     var userName = name;
-    const domain = 'telekonsultasi2.telemedical.id';
+    const domain = 'meet.jit.si';
     const options = {
         roomName: room_name,
         width: 550,

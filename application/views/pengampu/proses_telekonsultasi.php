@@ -251,7 +251,7 @@
     name = '<?php echo $user->name; ?>';
     var room_name = '<?php echo $room_name ?>';
     var userName = name;
-    const domain = 'telekonsultasi2.telemedical.id';
+    const domain = 'meet.jit.si';
     const options = {
         roomName: room_name,
         width: 550,
