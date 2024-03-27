@@ -1,3 +1,3 @@
 # DEVELOPMENT
 
-url: telemedicinelintasdemo2.indihealth.com
+url: indicare-vet.indihealth.com
