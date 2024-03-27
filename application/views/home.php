@@ -2,8 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <!---->
+
 <head>
-  <title>Telemedicine | Beranda</title>
+  <title>Indicare For Vet Clinic | Beranda</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -46,7 +47,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="<?php echo base_url('Home'); ?>"><img src="<?php echo base_url('assets/telemedicine/img/logo.png') ?>" class="img-brand"></a>
+      <a class="navbar-brand" href="<?php echo base_url('Home'); ?>"><img src="<?php echo base_url('assets/telemedicine/img/IndicareForVetClinic.png') ?>" class="img-brand"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
@@ -303,28 +304,29 @@
   <section class="ftco-section py-5 mt-5" id="footer" style="margin-bottom: 143px;">
 
   </section>
-  <footer class="footer pt-4 footer-baru">
+  <footer class="footer pt-4 footer-baru" id="footer">
     <div class="col-md-11 mx-auto">
       <div class="col-lg-12 py-5">
         <div class="row">
           <div class="col-lg-3">
             <p class="font-12 text-powered">Powered By</p>
             <div class="row">
-              <img src="<?php echo base_url('assets/telemedicine/img/logo-black.png') ?>" style="width: 100px !important; height: auto !important;" class="ml-4 img-logo-footer">
+              <!--<img src="<?php echo base_url('assets/telemedicine/img/logo.png') ?>" class="ml-4 img-logo-footer">-->
+              <img src="<?php echo base_url('assets/telemedicine/img/IndicareForVetClinic.png') ?>" class="ml-4 img-logo-footer">
             </div>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-2">
             <p class="font-bold font-tele">Site Map</p>
             <div class="font-18">
-              <span><a href="<?php echo base_url('Faq');?>" class="font-black">FAQ</a></span><br>
-              <span><a href="<?php echo base_url('Home');?>#beranda" class="font-black">Beranda</a></span><br>
-              <span><a href="<?php echo base_url('Home');?>#layanan" class="font-black">Layanan Kami</a></span><br>
-              <span><a href="<?php echo base_url('Home');?>#mitra-dokter-2" class="font-black">Mitra Dokter</a></span><br>
-              <span><a href="<?php echo base_url('Home');?>#news" class="font-black">Berita</a></span><br>
-              <span><a href="<?php echo base_url('Home');?>#footer" class="font-black">Kontak</a></span>
+              <span><a href="<?php echo base_url('Faq'); ?>" class="font-black">FAQ</a></span><br>
+              <span><a href="<?php echo base_url('Home'); ?>#beranda" class="font-black">Beranda</a></span><br>
+              <span><a href="<?php echo base_url('Home'); ?>#layanan" class="font-black">Layanan Kami</a></span><br>
+              <span><a href="<?php echo base_url('Home'); ?>#mitra-dokter-2" class="font-black">Mitra Dokter</a></span><br>
+              <span><a href="<?php echo base_url('Home'); ?>#news" class="font-black">Berita</a></span><br>
+              <span><a href="<?php echo base_url('Home'); ?>#footer" class="font-black">Kontak</a></span>
             </div>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-5">
             <p class="font-bold font-tele">Hubungi Kami</p>
             <div class="font-black font-18">
               <span>PT. Inditek Global Medika Indihealth for Smart Health</span><br>
@@ -334,7 +336,7 @@
               <span>Email : info@indihealth.com</span><br>
             </div>
           </div>
-          <div class="col-lg-3 font-18 text-right">
+          <div class="col-lg-2 font-18 text-right">
             <p class="font-bold font-tele">Temukan Kami</p>
             <a href="#"><img src="<?php echo base_url('assets/telemedicine/img/playstore.png') ?>" class="img-playstore"></a>
           </div>
@@ -342,63 +344,10 @@
       </div>
     </div>
     <div class="col-md-12 text-center p-1" style="background: #01a9ac;">
-      <span class="font-12 text-white font-droid">Version 1.0 Copyright © 2020. Indihealth. All rights reserved.</span>
+      <span class="font-12 text-white font-droid">Version 1.0 Copyright © 2020. EIUITB. All rights reserved.</span>
     </div>
   </footer>
-  <!-- <footer class="footer font-small pt-4" style="color: #59A799; background-color: #fff">
-          <div class="container footer">
-          <div class="col-lg-12">
-            <div class="row">
-              <div class="col-lg-4">
-              <ul class="list-unstyled list-inline text-center py-2">
-                <li class="list-inline-item mb-3">
-                  <h7>Powered by :</h7>
-                  <img src="<?php echo base_url('assets/telemedicine/img/logo.png') ?>" width="40%">
-                </li>
-                <li class="list-inline-item mb-2" >
-                <h7  class="text-left">Support by :</h7>
-                <img src="<?php echo base_url('assets/telemedicine/img/picture_logo.png') ?>" width="50%">
-                </li>
-                <li class="list-inline-item mb-2" >
-                <a href="#"><img src="<?php echo base_url('assets/telemedicine/img/playstore.png') ?>" width="40%"></a>
-                </li>
-              </ul>
-              </div>
-            <div class="col-lg-4">
-              <ul class="list-unstyled list-inline text-center py-3">
-                <li class="list-inline-item">
-                    <h3 class="mb-2"></h3>
-                    <h3 class="mb-2"></h3>
-                </li>
-            </ul>
-            </div>
-            <div class="col-lg-4">
-	            <ul class="list-unstyled list-inline text-left py-2">  
-	              <li class="list-inline-item" ><h4 style="color: #fff;"><b>Tentang Rumah Sakit</b></h4>
-	              </li>
-	              <li class="list-inline-item mb-1">
-	                Rumah sakit adalah institusi pelayanan kesehatan yang menyelenggarakan pelayanan kesehatan perorangan secara paripurna yang menyediakan pelayanan rawat inap, rawat jalan dan gawat darurat.
-	              </li>
-	              <li class="list-inline-item" ><h4 style="color: #fff;"><b>Kontak Kami</b></h4></li>
-	              <br><li class="list-inline-item "><i class="fa fa-map-marker"> Central Jakarta</i></li>
-	              <br><li class="list-inline-item ">Menara Thamrin 12th Floor</li>
-	              <br><li class="list-inline-item ">Jl. M.H Thamrin Kav.3 Jakarta 10250</li>
-	              <br><li class="list-inline-item ">T: +6221 230 2345 (Hunting)</li>
-	              <br><li class="list-inline-item ">F: +6221 230 3567</li>
-	              <br><li class="list-inline-item "><i class="fas fa-headphones fa-md"> 14052</i></li>
-	              <br><li class="list-inline-item "><i class="fa fa-phone fa-md"> (021) 230 2347</i></li>
-	              <br><li class="list-inline-item "><i class="far fa-envelope fa-md"> info@lintasarta.co.id</i></li>
-	            </ul>  
-            </div>
-              <div class="col-lg-12">
-                <div class="footer-copyright text-center py-5">
-                <h7>� Copyright &copy;<script>document.write(new Date().getFullYear());</script>. Indihealth & Lintasarta. All Rights Reserved. made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" style="color: #fff">Colorlib</a>
-                </div>      
-              </div>
-          </div>
-          </div>
-          </div>
-    </footer> -->
+
 
 
 
@@ -438,7 +387,7 @@
         $('.footer').removeClass('active');
         $('.layanan').addClass('border-b-3');
         $('.layanan').addClass('active');
-      }else if ($(this).scrollTop() >= $('#mitra-dokter').position().top && $(this).scrollTop() <= $('#news').position().top) {
+      } else if ($(this).scrollTop() >= $('#mitra-dokter').position().top && $(this).scrollTop() <= $('#news').position().top) {
         $('.beranda').removeClass('border-b-3');
         $('.beranda').removeClass('active');
         $('.layanan').removeClass('border-b-3');
@@ -449,7 +398,7 @@
         $('.footer').removeClass('active');
         $('.mitra-dokter').addClass('border-b-3');
         $('.mitra-dokter').addClass('active');
-      }else if ($(this).scrollTop() >= $('#news').position().top && $(this).scrollTop() <= $('#footer').position().top) {
+      } else if ($(this).scrollTop() >= $('#news').position().top && $(this).scrollTop() <= $('#footer').position().top) {
         $('.beranda').removeClass('border-b-3');
         $('.beranda').removeClass('active');
         $('.mitra-dokter').removeClass('border-b-3');
@@ -460,7 +409,7 @@
         $('.footer').removeClass('active');
         $('.news').addClass('border-b-3');
         $('.news').addClass('active');
-      }else if ($(this).scrollTop() >= $('#footer').position().top) {
+      } else if ($(this).scrollTop() >= $('#footer').position().top) {
         $('.beranda').removeClass('border-b-3');
         $('.beranda').removeClass('active');
         $('.mitra-dokter').removeClass('border-b-3');
@@ -471,7 +420,7 @@
         $('.layanan').removeClass('active');
         $('.footer').addClass('border-b-3');
         $('.footer').addClass('active');
-      }else{
+      } else {
         $('.layanan').removeClass('border-b-3');
         $('.layanan').removeClass('active');
         $('.mitra-dokter').removeClass('border-b-3');

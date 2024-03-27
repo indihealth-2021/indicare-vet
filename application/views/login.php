@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Telemedicine | Beranda</title>
+  <title>Indicare For Ver Clinic | Beranda</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -45,7 +45,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light font-ubuntu" id="ftco-navbar" style="border-bottom:1px; box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);">
     <div class="container">
-      <a class="navbar-brand" href="<?php echo base_url('Home'); ?>"><img src="<?php echo base_url('assets/telemedicine/img/logo.png') ?>" class="img-brand"></a>
+      <a class="navbar-brand" href="<?php echo base_url('Home'); ?>"><img src="<?php echo base_url('assets/telemedicine/img/IndicareForVetClinic.png') ?>" class="img-brand"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
@@ -81,51 +81,52 @@
             <p class="font-16 font-bold-black font-notosans">Selamat Datang</p>
             <p class="font-24 font-bold-black font-ooredoo-reg">Login Dengan Akun Kamu</p>
             <div class="font-notosans">
-            	<?= form_open('Login/login'); ?>
-                <?php if ($this->session->flashdata('msg_login')) {
-                  $isSukses = $this->session->flashdata('msg_login_sukses') ? 'alert-success' : 'alert-danger';
-                  echo '<div class="' . $isSukses . ' border pb-1">' . $this->session->flashdata('msg_login') . '</div>';
-                } ?>
-                <label class="form-label">Username</label>
-                <div class="input-icon">
-                  <input required type="text" class="form-control" name="email" placeholder="Masukan Username">
-                  <!-- <i class="fa fa-user"></i> -->
-                  <i><svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
-                      <path d="M10.5984 11.6264C10.4824 11.588 9.7495 11.2535 10.2075 9.84376H10.2009C11.3947 8.5987 12.307 6.59524 12.307 4.6228C12.307 1.58992 10.3154 0 8.00073 0C5.6846 0 3.70392 1.58918 3.70392 4.6228C3.70392 6.60337 4.61112 8.61495 5.81222 9.85705C6.2804 11.1006 5.44321 11.5622 5.26819 11.6272C2.84412 12.5148 0 14.1328 0 15.7301V16.329C0 18.5052 4.167 19 8.02334 19C11.8855 19 16 18.5052 16 16.329V15.7301C16 14.0848 13.142 12.4793 10.5984 11.6264Z" fill="#999999" />
-                    </svg></i>
-                </div>
-                <label class="form-label">Password</label>
-                <div class="input-icon">
-                  <input required type="password" class="form-control" id="pass" name="password" placeholder="Masukan Password">
-                  <!-- <i class="fa fa-lock"></i> -->
+              <?= form_open('Login/login'); ?>
+              <?php if ($this->session->flashdata('msg_login')) {
+                $isSukses = $this->session->flashdata('msg_login_sukses') ? 'alert-success' : 'alert-danger';
+                echo '<div class="' . $isSukses . ' border pb-1">' . $this->session->flashdata('msg_login') . '</div>';
+              } ?>
+              <label class="form-label">Username</label>
+              <div class="input-icon">
+                <input required type="text" class="form-control" name="email" placeholder="Masukan Username">
+                <!-- <i class="fa fa-user"></i> -->
+                <i><svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
+                    <path d="M10.5984 11.6264C10.4824 11.588 9.7495 11.2535 10.2075 9.84376H10.2009C11.3947 8.5987 12.307 6.59524 12.307 4.6228C12.307 1.58992 10.3154 0 8.00073 0C5.6846 0 3.70392 1.58918 3.70392 4.6228C3.70392 6.60337 4.61112 8.61495 5.81222 9.85705C6.2804 11.1006 5.44321 11.5622 5.26819 11.6272C2.84412 12.5148 0 14.1328 0 15.7301V16.329C0 18.5052 4.167 19 8.02334 19C11.8855 19 16 18.5052 16 16.329V15.7301C16 14.0848 13.142 12.4793 10.5984 11.6264Z" fill="#999999" />
+                  </svg></i>
+              </div>
+              <label class="form-label">Password</label>
+              <div class="input-icon">
+                <input required type="password" class="form-control" id="pass" name="password" placeholder="Masukan Password">
+                <!-- <i class="fa fa-lock"></i> -->
 
-                  <i id="mybutton" onclick="change()"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye-off">
-                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
-                      <line x1="1" y1="1" x2="23" y2="23" />
-                    </svg></i>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input mt-3" type="checkbox" name="remember_me" value="true" id="flexCheckDefault">
-                  <label class="form-check-label mt-2 font-14 font-bold-black" for="flexCheckDefault">
-                    Ingat Saya
-                  </label>
-                </div>
-                <div class="mb-3">
-                  <a href="<?php echo base_url('ForgotPassword'); ?>" class="font-14 font-tele font-bold">Lupa Password ?</a>
-                </div>
-                <div class="mb-3">
-                  <!-- <a href="<?php echo base_url('Login'); ?>" type="submit" class="btn btn-login btn-block">Masuk</a> -->
-                  <button type="submit" class="btn btn-login btn-block">Masuk</button>
-                </div>
-                <div class="mb-3 font-14 text-center">
-                  Belum Punya Akun ? <a href="<?php echo base_url('register'); ?>" class="font-14 font-tele font-bold">Registrasi disini !</a>
-                </div>
-                <?= form_close(); ?>
+                <i id="mybutton" onclick="change()"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye-off">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                    <line x1="1" y1="1" x2="23" y2="23" />
+                  </svg></i>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input mt-3" type="checkbox" name="remember_me" value="true" id="flexCheckDefault">
+                <label class="form-check-label mt-2 font-14 font-bold-black" for="flexCheckDefault">
+                  Ingat Saya
+                </label>
+              </div>
+              <div class="mb-3">
+                <a href="<?php echo base_url('ForgotPassword'); ?>" class="font-14 font-tele font-bold">Lupa Password ?</a>
+              </div>
+              <div class="mb-3">
+                <!-- <a href="<?php echo base_url('Login'); ?>" type="submit" class="btn btn-login btn-block">Masuk</a> -->
+                <button type="submit" class="btn btn-login btn-block">Masuk</button>
+              </div>
+              <div class="mb-3 font-14 text-center">
+                Belum Punya Akun ? <a href="<?php echo base_url('register'); ?>" class="font-14 font-tele font-bold">Registrasi disini !</a>
+              </div>
+              <?= form_close(); ?>
             </div>
           </div>
         </div>
       </div>
   </section>
+
 
   <footer class="footer pt-4 footer-baru" id="footer">
     <div class="col-md-11 mx-auto">
@@ -134,13 +135,14 @@
           <div class="col-lg-3">
             <p class="font-12 text-powered">Powered By</p>
             <div class="row">
-              <img src="<?php echo base_url('assets/telemedicine/img/logo-black.png') ?>" style="width: 100px !important; height: auto !important;" class="ml-4 ">
+              <!--<img src="<?php echo base_url('assets/telemedicine/img/logo.png') ?>" class="ml-4 img-logo-footer">-->
+              <img src="<?php echo base_url('assets/telemedicine/img/IndicareForVetClinic.png') ?>" class="ml-4 img-logo-footer">
             </div>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-2">
             <p class="font-bold font-tele">Site Map</p>
             <div class="font-18">
-              <span><a href="<?php echo base_url('Faq');?>" class="font-black">FAQ</a></span><br>
+              <span><a href="<?php echo base_url('Faq'); ?>" class="font-black">FAQ</a></span><br>
               <span><a href="<?php echo base_url('Home'); ?>#beranda" class="font-black">Beranda</a></span><br>
               <span><a href="<?php echo base_url('Home'); ?>#layanan" class="font-black">Layanan Kami</a></span><br>
               <span><a href="<?php echo base_url('Home'); ?>#mitra-dokter-2" class="font-black">Mitra Dokter</a></span><br>
@@ -148,7 +150,7 @@
               <span><a href="<?php echo base_url('Home'); ?>#footer" class="font-black">Kontak</a></span>
             </div>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-5">
             <p class="font-bold font-tele">Hubungi Kami</p>
             <div class="font-black font-18">
               <span>PT. Inditek Global Medika Indihealth for Smart Health</span><br>
@@ -158,7 +160,7 @@
               <span>Email : info@indihealth.com</span><br>
             </div>
           </div>
-          <div class="col-lg-3 font-18 text-right">
+          <div class="col-lg-2 font-18 text-right">
             <p class="font-bold font-tele">Temukan Kami</p>
             <a href="#"><img src="<?php echo base_url('assets/telemedicine/img/playstore.png') ?>" class="img-playstore"></a>
           </div>
@@ -166,7 +168,7 @@
       </div>
     </div>
     <div class="col-md-12 text-center p-1" style="background: #01a9ac;">
-      <span class="font-12 text-white font-droid">Version 1.0 Copyright © 2020. Indihealth. All rights reserved.</span>
+      <span class="font-12 text-white font-droid">Version 1.0 Copyright © 2024. Indihealth. All rights reserved.</span>
     </div>
   </footer>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Telemedicine | Beranda</title>
+  <title>Indicare For Ver Clinic | Beranda</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -45,7 +45,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light font-ubuntu" id="ftco-navbar" style="border-bottom:1px; box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);">
     <div class="container">
-      <a class="navbar-brand" href="<?php echo base_url('Home'); ?>"><img src="<?php echo base_url('assets/telemedicine/img/logo.png') ?>" class="img-brand"></a>
+      <a class="navbar-brand" href="<?php echo base_url('Home'); ?>"><img src="<?php echo base_url('assets/telemedicine/img/IndicareForVetClinic.png') ?>" class="img-brand"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
@@ -82,19 +82,19 @@
             <p class="font-24 font-bold-black font-ooredoo-reg">Masukan Email untuk Pemulihan Akun Anda</p>
             <div class="font-notosans">
               <?= form_open('ForgotPassword/send_request'); ?>
-                <label class="form-label">Email</label>
-                <div class="input-icon mb-5">
-                  <input requaired type="email" class="form-control" name="email" placeholder="Email">
-                  <i class="fas fa-envelope"></i>
-                </div>
+              <label class="form-label">Email</label>
+              <div class="input-icon mb-5">
+                <input requaired type="email" class="form-control" name="email" placeholder="Email">
+                <i class="fas fa-envelope"></i>
+              </div>
 
-                <div class="mb-3">
-                  <!-- <a href="<?php echo base_url('Login'); ?>" type="submit" class="btn btn-login btn-block">Masuk</a> -->
-                  <button type="submit" class="btn btn-login btn-block">Berikutnya</button>
-                </div>
-                <div class="mb-3 font-14">
-                  Ingat Password ? <a href="<?php echo base_url('Login'); ?>" class="font-14 font-tele font-bold">Login disini !</a>
-                </div>
+              <div class="mb-3">
+                <!-- <a href="<?php echo base_url('Login'); ?>" type="submit" class="btn btn-login btn-block">Masuk</a> -->
+                <button type="submit" class="btn btn-login btn-block">Berikutnya</button>
+              </div>
+              <div class="mb-3 font-14">
+                Ingat Password ? <a href="<?php echo base_url('Login'); ?>" class="font-14 font-tele font-bold">Login disini !</a>
+              </div>
               <?= form_close(); ?>
             </div>
           </div>
@@ -109,13 +109,14 @@
           <div class="col-lg-3">
             <p class="font-12 text-powered">Powered By</p>
             <div class="row">
-              <img src="<?php echo base_url('assets/telemedicine/img/logo.png') ?>" class="ml-4 img-logo-footer">
+              <!--<img src="<?php echo base_url('assets/telemedicine/img/logo.png') ?>" class="ml-4 img-logo-footer">-->
+              <img src="<?php echo base_url('assets/telemedicine/img/IndicareForVetClinic.png') ?>" class="ml-4 img-logo-footer">
             </div>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-2">
             <p class="font-bold font-tele">Site Map</p>
             <div class="font-18">
-              <span><a href="<?php echo base_url('Faq');?>" class="font-black">FAQ</a></span><br>
+              <span><a href="<?php echo base_url('Faq'); ?>" class="font-black">FAQ</a></span><br>
               <span><a href="<?php echo base_url('Home'); ?>#beranda" class="font-black">Beranda</a></span><br>
               <span><a href="<?php echo base_url('Home'); ?>#layanan" class="font-black">Layanan Kami</a></span><br>
               <span><a href="<?php echo base_url('Home'); ?>#mitra-dokter-2" class="font-black">Mitra Dokter</a></span><br>
@@ -123,7 +124,7 @@
               <span><a href="<?php echo base_url('Home'); ?>#footer" class="font-black">Kontak</a></span>
             </div>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-5">
             <p class="font-bold font-tele">Hubungi Kami</p>
             <div class="font-black font-18">
               <span>PT. Inditek Global Medika Indihealth for Smart Health</span><br>
@@ -133,15 +134,15 @@
               <span>Email : info@indihealth.com</span><br>
             </div>
           </div>
-          <div class="col-lg-3 font-18 text-right">
+          <div class="col-lg-2 font-18 text-right">
             <p class="font-bold font-tele">Temukan Kami</p>
             <a href="#"><img src="<?php echo base_url('assets/telemedicine/img/playstore.png') ?>" class="img-playstore"></a>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-12 text-center p-1" style="background: #01c2c5;">
-      <span class="font-12 text-white font-droid">Version 1.0 Copyright © 2020. Lintasarta & Indosat. All rights reserved.</span>
+    <div class="col-md-12 text-center p-1" style="background: #01a9ac;">
+      <span class="font-12 text-white font-droid">Version 1.0 Copyright © 2024. Indihealth. All rights reserved.</span>
     </div>
   </footer>
 

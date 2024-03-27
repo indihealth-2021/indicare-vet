@@ -379,8 +379,8 @@ small,
   height: auto;
 }
 .img-logo-footer {
-  width: 114px !important;
-  height: 67px;
+  width: 200px !important;
+  height: auto;
 }
 .img-faq-header {
   width: 508px;

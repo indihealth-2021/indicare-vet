@@ -6,7 +6,7 @@
 
               <h4><strong><?= $head_resep->nama_faskes ?></strong></h4>
               <small><?= $head_resep->alamat ?></small><br>
-                <small><?= !empty($head_resep->no_telp) ? "<b>Telp:</b> ".$head_resep->no_telp:""?> <?= $head_resep->no_telp ?> <?= !empty($head_resep->email) ? "<b>e-mail:</b> ".$head_resep->email:""?>  <?= !empty($head_resep->fax) ? "<b>Fax:</b> ".$head_resep->fax:""?>  <?= !empty($head_resep->no_wa) ? "<b>no hp:</b> ".$head_resep->no_wa:""?></small>
+                <small><?= !empty($head_resep->no_telp) ? "<b>Telp:</b> ".$head_resep->no_telp:""?>  <?= !empty($head_resep->email) ? "<b>e-mail:</b> ".$head_resep->email:""?>  <?= !empty($head_resep->fax) ? "<b>Fax:</b> ".$head_resep->fax:""?>  <?= !empty($head_resep->no_wa) ? "<b>no hp:</b> ".$head_resep->no_wa:""?></small>
 
                 <!-- <small>Kota Bandung</small> -->
         </div>

@@ -9,4 +9,3 @@ RewriteCond %{HTTP:X-Forwarded-SSL} !on
 RewriteCond %{HTTP_HOST} ^telemedicine\-internal\.indihealth\.com$ [OR]
 RewriteCond %{HTTP_HOST} ^www\.telemedicine\-internal\.indihealth\.com$
 RewriteRule ^/?$ "https\:\/\/telemedicine\-internal\.indihealth\.com\/" [R=301,L]
-

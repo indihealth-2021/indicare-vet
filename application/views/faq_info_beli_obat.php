@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Telemedicine | Faq</title>
+  <title>Indicare For Vet Clinic | Faq</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -41,14 +41,14 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/website/css/style.css'); ?>">
 
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-  
+
 </head>
 
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light font-ubuntu" id="ftco-navbar" style="border-bottom:1px; box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);">
     <div class="container">
-      <a class="navbar-brand" href="<?php echo base_url('Home'); ?>"><img src="<?php echo base_url('assets/telemedicine/img/logo.png') ?>" class="img-brand"></a>
+      <a class="navbar-brand" href="<?php echo base_url('Home'); ?>"><img src="<?php echo base_url('assets/telemedicine/img/IndicareForVetClinic.png') ?>" class="img-brand"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
@@ -73,13 +73,13 @@
     <div class="col-md-10 mx-auto font-ubuntu pb-5">
       <div class="row">
         <div class="col-sm-12 col-12 ">
-         <nav aria-label="">
-           <ol class="breadcrumb" style="background-color: transparent;">
-             <li class="breadcrumb-item active"><a href="<?php echo base_url('Faq'); ?>" class="text-black">FAQ</a></li>
-             <li class="breadcrumb-item" aria-current="page"><a href="<?php echo base_url('Faq/beliobat') ?>" class="text-black font-bold-7">Info Beli Obat</a></li>
-           </ol>
-         </nav>
-       </div>
+          <nav aria-label="">
+            <ol class="breadcrumb" style="background-color: transparent;">
+              <li class="breadcrumb-item active"><a href="<?php echo base_url('Faq'); ?>" class="text-black">FAQ</a></li>
+              <li class="breadcrumb-item" aria-current="page"><a href="<?php echo base_url('Faq/beliobat') ?>" class="text-black font-bold-7">Info Beli Obat</a></li>
+            </ol>
+          </nav>
+        </div>
         <h2 class="text-faq col-md-10">Frequently Asked Questions (FAQ)</h2>
 
         <div class="col-md-12">
@@ -96,7 +96,7 @@
               <div class="" id="headingOne">
                 <h2 class="mb-0">
                   <button class="btn btn-faq btn-block text-left" type="button" data-toggle="collapse" data-target="#info1" aria-expanded="true" aria-controls="info1"><i class="fas fa-caret-down"></i>
-                  Bagaimana cara melakukan pembelian obat?
+                    Bagaimana cara melakukan pembelian obat?
                   </button>
                 </h2>
               </div>
@@ -120,48 +120,47 @@
     </div>
   </section>
 
-  <footer class="footer pt-4 footer-baru">
+  <footer class="footer pt-4 footer-baru" id="footer">
     <div class="col-md-11 mx-auto">
       <div class="col-lg-12 py-5">
         <div class="row">
           <div class="col-lg-3">
             <p class="font-12 text-powered">Powered By</p>
             <div class="row">
-              <img src="<?php echo base_url('assets/telemedicine/img/ooredoo.png') ?>" class="img-logo-footer">
-              <img src="<?php echo base_url('assets/telemedicine/img/logo.png') ?>" class="ml-4 img-logo-footer">
+              <!--<img src="<?php echo base_url('assets/telemedicine/img/logo.png') ?>" class="ml-4 img-logo-footer">-->
+              <img src="<?php echo base_url('assets/telemedicine/img/IndicareForVetClinic.png') ?>" class="ml-4 img-logo-footer">
             </div>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-2">
             <p class="font-bold font-tele">Site Map</p>
             <div class="font-18">
-              <span><a href="<?php echo base_url('Faq');?>" class="font-black">FAQ</a></span><br>
-              <span><a href="<?php echo base_url('Home');?>#beranda" class="font-black">Beranda</a></span><br>
-              <span><a href="<?php echo base_url('Home');?>#layanan" class="font-black">Layanan Kami</a></span><br>
-              <span><a href="<?php echo base_url('Home');?>#mitra-dokter-2" class="font-black">Mitra Dokter</a></span><br>
-              <span><a href="<?php echo base_url('Home');?>#news" class="font-black">Berita</a></span><br>
-              <span><a href="<?php echo base_url('Home');?>#footer" class="font-black">Kontak</a></span>
+              <span><a href="<?php echo base_url('Faq'); ?>" class="font-black">FAQ</a></span><br>
+              <span><a href="<?php echo base_url('Home'); ?>#beranda" class="font-black">Beranda</a></span><br>
+              <span><a href="<?php echo base_url('Home'); ?>#layanan" class="font-black">Layanan Kami</a></span><br>
+              <span><a href="<?php echo base_url('Home'); ?>#mitra-dokter-2" class="font-black">Mitra Dokter</a></span><br>
+              <span><a href="<?php echo base_url('Home'); ?>#news" class="font-black">Berita</a></span><br>
+              <span><a href="<?php echo base_url('Home'); ?>#footer" class="font-black">Kontak</a></span>
             </div>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-5">
             <p class="font-bold font-tele">Hubungi Kami</p>
             <div class="font-black font-18">
-              <span>Central Jakarta</span><br>
-              <span>Menara Thamrin 12th Floor</span><br>
-              <span>Jl. M.H Thamrin Kav.3 Jakarta 10250</span><br>
-              <span>T: +6221 230 2345 (Hunting)</span><br>
-              <span>F: +6221 230 3567 14052</span><br>
-              <span>(021) 230 2347</span>
+              <span>PT. Inditek Global Medika Indihealth for Smart Health</span><br>
+              <span>Jl. Tubagus Raya No.5B Kota Bandung</span><br>
+              <span>Telp : +6222 250 1077</span><br>
+              <span>Faks : +6222 251 4440</span><br>
+              <span>Email : info@indihealth.com</span><br>
             </div>
           </div>
-          <div class="col-lg-3 font-18 text-right">
+          <div class="col-lg-2 font-18 text-right">
             <p class="font-bold font-tele">Temukan Kami</p>
             <a href="#"><img src="<?php echo base_url('assets/telemedicine/img/playstore.png') ?>" class="img-playstore"></a>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-12 text-center p-1" style="background: #59A799;">
-      <span class="font-12 text-white font-droid">Version 1.0 Copyright © 2020. Lintasarta & Indosat. All rights reserved.</span>
+    <div class="col-md-12 text-center p-1" style="background: #01a9ac;">
+      <span class="font-12 text-white font-droid">Version 1.0 Copyright © 2024. Indihealth. All rights reserved.</span>
     </div>
   </footer>
 
@@ -193,12 +192,13 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="<?php echo base_url('assets/website/js/google-map.js'); ?>"></script>
   <script src="<?php echo base_url('assets/website/js/main.js'); ?>"></script>
-  
+
 </body>
 
 </html>
 <style>
-  .fa, .fas {
+  .fa,
+  .fas {
     font-weight: 900;
     margin-left: 0;
   }
