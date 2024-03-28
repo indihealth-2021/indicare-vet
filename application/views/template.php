@@ -9,7 +9,7 @@
   <meta content="Fri, 20 Jan 1984 01:11:11 GMT" />
   <meta http-equiv="Pragma" content="no-cache" />
   <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo.png">
-  <title>Telemedicine | <?php echo ucfirst($this->uri->segments[1]) ?> - <?php echo $title ?></title>
+  <title>Indicare Vet For vet Clinic | <?php echo ucfirst($this->uri->segments[1]) ?> - <?php echo $title ?></title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Font -->
   <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
@@ -26,65 +26,65 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dashboard/css/style.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dashboard/css/select2.min.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dashboard/css/dataTables.bootstrap4.min.css'); ?>">
-   <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-messaging.js"></script>
-    <script src="<?php echo base_url('assets/dashboard/js/jquery-3.2.1.min.js'); ?>"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<style type="text/css">
+  <script src="<?php echo base_url('assets/dashboard/js/jquery-3.2.1.min.js'); ?>"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style type="text/css">
     .preloader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        background-color: rgba(0, 0, 0, 0.83)
-      }
-      .preloader .loading {
-        position: absolute;
-        color:  #FFF;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%,-50%);
-        font: 14px;
-      }
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background-color: rgba(0, 0, 0, 0.83)
+    }
+
+    .preloader .loading {
+      position: absolute;
+      color: #FFF;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font: 14px;
+    }
   </style>
-    
+
   <script>
- baseUrl = '<?php echo base_url(); ?>';
+    baseUrl = '<?php echo base_url(); ?>';
 
     var firebaseConfig = {
-          apiKey: "AIzaSyB-RclJ3nO0yWpmXvhKUPDDD2RNwpT6h20",
+      apiKey: "AIzaSyB-RclJ3nO0yWpmXvhKUPDDD2RNwpT6h20",
 
-          authDomain: "telemedicine-internal.firebaseapp.com",
+      authDomain: "telemedicine-internal.firebaseapp.com",
 
-          databaseURL: "https://telemedicine-internal-default-rtdb.asia-southeast1.firebasedatabase.app",
+      databaseURL: "https://telemedicine-internal-default-rtdb.asia-southeast1.firebasedatabase.app",
 
-          projectId: "telemedicine-internal",
+      projectId: "telemedicine-internal",
 
-          storageBucket: "telemedicine-internal.appspot.com",
+      storageBucket: "telemedicine-internal.appspot.com",
 
-          messagingSenderId: "782919055693",
+      messagingSenderId: "782919055693",
 
-          appId: "1:782919055693:web:68b90d015a672459381f04"
+      appId: "1:782919055693:web:68b90d015a672459381f04"
 
     };
     firebase.initializeApp(firebaseConfig);
     const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
-
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
   </script>
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dashboard/css/bootstrap-datetimepicker.min.css'); ?>">
 
@@ -222,9 +222,9 @@
               echo 'Dokter';
             } else if (strtolower($this->uri->segments[1]) == 'admin') {
               echo 'Admin';
-            } else if(strtolower($this->uri->segments[1] == 'diampu')){
+            } else if (strtolower($this->uri->segments[1] == 'diampu')) {
               echo 'Diampu';
-            } else if(strtolower($this->uri->segments[1] == 'pengampu')){
+            } else if (strtolower($this->uri->segments[1] == 'pengampu')) {
               echo 'Pengampu';
             }
             ?>
@@ -249,9 +249,9 @@
       $this->load->view('pasien/_partial/sidebar');
     } else if (strtolower($this->uri->segments[1] == 'farmasi')) {
       $this->load->view('farmasi/_partial/sidebar');
-    }  else if(strtolower($this->uri->segments[1] == 'diampu')){
+    } else if (strtolower($this->uri->segments[1] == 'diampu')) {
       $this->load->view('diampu/_partial/sidebar');
-    } else if(strtolower($this->uri->segments[1] == 'pengampu')){
+    } else if (strtolower($this->uri->segments[1] == 'pengampu')) {
       $this->load->view('pengampu/_partial/sidebar');
     } else {
       echo "Not Found";
@@ -341,20 +341,20 @@
       </div>
     </div>
     <?php if ($user_2 && $user_2->id_user_kategori != 5) { ?>
-    <div class="modal fade" id="ModalNotifAllow" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content" style="height:auto;">
-          <div class="modal-header text-white" style="background:#59A799;">
-            <h3 class="modal-title" id="exampleModalLabel">Pemberitahuan</h3>
-          </div>
-          <div class="modal-body text-center">
-            <img src="<?php echo base_url('assets/telemedicine/img/allow-akses.gif'); ?>" class="img-allow"><br />
-            <p id="isinotifmodalallow" class="my-5 font-16 text-center">Allow Notification anda untuk menggunakan aplikasi ini.</p>
-            <button class="btn btn-block bg-tele text-light" onclick="location.reload()">Klik Jika Notif Sudah Diizinkan</button>
+      <div class="modal fade" id="ModalNotifAllow" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content" style="height:auto;">
+            <div class="modal-header text-white" style="background:#59A799;">
+              <h3 class="modal-title" id="exampleModalLabel">Pemberitahuan</h3>
+            </div>
+            <div class="modal-body text-center">
+              <img src="<?php echo base_url('assets/telemedicine/img/allow-akses.gif'); ?>" class="img-allow"><br />
+              <p id="isinotifmodalallow" class="my-5 font-16 text-center">Allow Notification anda untuk menggunakan aplikasi ini.</p>
+              <button class="btn btn-block bg-tele text-light" onclick="location.reload()">Klik Jika Notif Sudah Diizinkan</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     <?php } ?>
 
     <!-- <footer class="main-footer" style="background-color: #2C94D2; color: #000000;">
@@ -403,61 +403,60 @@
   <!--firebase-->
 
 
-   <!--sweetalert-->
+  <!--sweetalert-->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   <script>
-       $('#jawaban').on('shown.bs.modal', function () {
-           firebase
-                    .database()
-                    .ref("panggilan/<?= md5($user->id) ?>")
-                    .update({
-                    
-                      connected: 1,
-                    });
-          })
-     <?php if ($user_2 && $user_2->id_user_kategori == 0) { ?>
-    firebase.database().ref("panggilan/<?= md5($user->id) ?>").on('value', function(snapshot) {
-             firebase
-              .database()
-              .ref("panggilan/<?= md5($user->id) ?>")
-              .once("value", function (snapshot) {
-              
-                if(snapshot.val().closeCall == 1)
-                {
-                   $('#jawaban').modal('hide'); 
-                 } else if(snapshot.val().calling == 1 && snapshot.val().accepted == 0){
-                   var audio = document.getElementById('bell-ring');
-                  audio.play();
-                   $('#jawaban').modal('show'); 
-                 }
+    $('#jawaban').on('shown.bs.modal', function() {
+      firebase
+        .database()
+        .ref("panggilan/<?= md5($user->id) ?>")
+        .update({
 
-                $("#jawab").attr('data-id-jadwal-konsultasi',snapshot.val().id_jadwal_konsultasi);
-                $("#jawab").attr('data-room-name',snapshot.val().roomName);
-                $("#jawab").attr('data-id-dokter',snapshot.val().id_dokter);
-                $("#name_panggilan").html(snapshot.val().call_From);
-                $("#jawab").attr('href',snapshot.val().consult_room);
-
-                // console.log(snapshot.val().call_idx);
-                 // $('#jawaban').modal('hide'); 
-                 
-              });
-          })
-    $("#jawab").click(function(){
-      jawabCall();
+          connected: 1,
+        });
     })
+    <?php if ($user_2 && $user_2->id_user_kategori == 0) { ?>
+      firebase.database().ref("panggilan/<?= md5($user->id) ?>").on('value', function(snapshot) {
+        firebase
+          .database()
+          .ref("panggilan/<?= md5($user->id) ?>")
+          .once("value", function(snapshot) {
 
-    $("#tolak_pasien").click(function(){
-      closeCall();
-    })
-    function closeCall()
-      {
-         $('#jawaban').modal('hide'); 
+            if (snapshot.val().closeCall == 1) {
+              $('#jawaban').modal('hide');
+            } else if (snapshot.val().calling == 1 && snapshot.val().accepted == 0) {
+              var audio = document.getElementById('bell-ring');
+              audio.play();
+              $('#jawaban').modal('show');
+            }
+
+            $("#jawab").attr('data-id-jadwal-konsultasi', snapshot.val().id_jadwal_konsultasi);
+            $("#jawab").attr('data-room-name', snapshot.val().roomName);
+            $("#jawab").attr('data-id-dokter', snapshot.val().id_dokter);
+            $("#name_panggilan").html(snapshot.val().call_From);
+            $("#jawab").attr('href', snapshot.val().consult_room);
+
+            // console.log(snapshot.val().call_idx);
+            // $('#jawaban').modal('hide'); 
+
+          });
+      })
+      $("#jawab").click(function() {
+        jawabCall();
+      })
+
+      $("#tolak_pasien").click(function() {
+        closeCall();
+      })
+
+      function closeCall() {
+        $('#jawaban').modal('hide');
         firebase
           .database()
           .ref("panggilan/<?= md5($user->id) ?>")
           .update({
-          
+
             time: Date.now(),
             closeCall: 1,
             closePatient: 1,
@@ -466,35 +465,35 @@
             accepted: 0,
           });
       }
-    function jawabCall()
-      {
-         $('#jawaban').modal('hide'); 
-         firebase
+
+      function jawabCall() {
+        $('#jawaban').modal('hide');
+        firebase
           .database()
           .ref("panggilan/<?= md5($user->id) ?>")
           .update({
-          
+
             time: Date.now(),
             reject: 0,
             endCall: 0,
             accepted: 1,
           });
 
-          firebase
-              .database()
-              .ref("panggilan/<?= md5($user->id) ?>")
-              .once("value", function (snapshot) {
-                  
-                $('#jawaban').modal('hide'); 
-                
+        firebase
+          .database()
+          .ref("panggilan/<?= md5($user->id) ?>")
+          .once("value", function(snapshot) {
 
-                $("#jawab").attr('href',snapshot.val().consult_room);
-                window.location.replace(snapshot.val().consult_room);
-                // console.log(snapshot.val().call_idx);
-                
-              });
+            $('#jawaban').modal('hide');
+
+
+            $("#jawab").attr('href', snapshot.val().consult_room);
+            window.location.replace(snapshot.val().consult_room);
+            // console.log(snapshot.val().call_idx);
+
+          });
       }
-     <?php } ?>
+    <?php } ?>
     $('input[type=number]').on('focus', function(e) {
       $(this).on('wheel.disableScroll', function(e) {
         e.preventDefault()
@@ -540,13 +539,12 @@
   </script>
 
   <script>
-  
     const pesan = firebase.messaging();
     pesan.getToken().then((currentToken) => {
       if (currentToken) {
         $.ajax({
           method: 'GET',
-          url: baseUrl + "Conference/RegId/"+currentToken,
+          url: baseUrl + "Conference/RegId/" + currentToken,
           success: function(data) {
             if (data) {
               console.log("update reg id berhasil");
@@ -654,17 +652,17 @@
         //   }
         // }
 
-        if(JSON.parse(JSON.parse(payload.data.body).sub_name == 'pengampu_typing_cp')){
+        if (JSON.parse(JSON.parse(payload.data.body).sub_name == 'pengampu_typing_cp')) {
           $('#catatan_pengampu').val(JSON.parse(payload.data.body).catatan_pengampu);
         }
-        if(JSON.parse(JSON.parse(payload.data.body).sub_name == 'pengampu_typing_dp')){
+        if (JSON.parse(JSON.parse(payload.data.body).sub_name == 'pengampu_typing_dp')) {
           $('#dokter_pengampu').val(JSON.parse(payload.data.body).dokter_pengampu);
         }
 
-        if(JSON.parse(JSON.parse(payload.data.body).sub_name == 'diampu_typing_cd')){
+        if (JSON.parse(JSON.parse(payload.data.body).sub_name == 'diampu_typing_cd')) {
           $('#catatan_diampu').val(JSON.parse(payload.data.body).catatan_diampu);
         }
-        if(JSON.parse(JSON.parse(payload.data.body).sub_name == 'diampu_typing_dd')){
+        if (JSON.parse(JSON.parse(payload.data.body).sub_name == 'diampu_typing_dd')) {
           $('#dokter_diampu').val(JSON.parse(payload.data.body).dokter_diampu);
         }
         if (JSON.parse(JSON.parse(payload.data.body).name == 'panggilan_konsultasi_berakhir_pengampu')) {
@@ -855,14 +853,14 @@
     </script>
   <?php } ?>
 
-  <?php if($user_2 && $user_2->id_user_kategori != 5){ ?>
-  <script>
-  if(Notification.permission === "default"){
-    $('#ModalNotifAllow').modal();
-  }else if(Notification.permission === "denied"){
-    $('#ModalNotifAllow').modal();
-  }
-  </script>
+  <?php if ($user_2 && $user_2->id_user_kategori != 5) { ?>
+    <script>
+      if (Notification.permission === "default") {
+        $('#ModalNotifAllow').modal();
+      } else if (Notification.permission === "denied") {
+        $('#ModalNotifAllow').modal();
+      }
+    </script>
   <?php } ?>
 
   <script>

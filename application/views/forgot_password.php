@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Indicare For Ver Clinic | Beranda</title>
+  <title>Indicare Vet For vet Clinic | Beranda</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -110,7 +110,7 @@
             <p class="font-12 text-powered">Powered By</p>
             <div class="row">
               <!--<img src="<?php echo base_url('assets/telemedicine/img/logo.png') ?>" class="ml-4 img-logo-footer">-->
-              <img src="<?php echo base_url('assets/telemedicine/img/IndicareForVetClinic.png') ?>" class="ml-4 img-logo-footer">
+              <img src="<?php echo base_url('assets/telemedicine/img/picture_logo.png') ?>" class="ml-4 img-logo-footer">
             </div>
           </div>
           <div class="col-lg-2">
