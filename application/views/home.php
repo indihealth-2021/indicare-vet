@@ -344,7 +344,7 @@
       </div>
     </div>
     <div class="col-md-12 text-center p-1" style="background: #01a9ac;">
-      <span class="font-12 text-white font-droid">Version 1.0 Copyright © 2020. EIUITB. All rights reserved.</span>
+      <span class="font-12 text-white font-droid">Version 1.0 Copyright © 2024. Indihealth. All rights reserved.</span>
     </div>
   </footer>
 
