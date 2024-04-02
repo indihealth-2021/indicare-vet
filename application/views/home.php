@@ -164,8 +164,8 @@
               <span class=""><img src="<?php echo base_url('assets/website/img/consultation.svg'); ?> " width="50%"></span>
             </div>
             <div class="media-body p-2 mt-3">
-              <h3 class="heading">Integrated EMR-SIMRS</h3>
-              <p>Sistem Telekonsultasi yang terintegrasi SIMRS, sehingga diagnosa dapat langsung mengisi pada catatan medis pasien (Mini EMR)</p>
+              <h3 class="heading">Homecare</h3>
+              <p>Homacare adalah platform inovatif yang menghadirkan perawatan kesehatan yang andal dan berkualitas ke pintu rumah Anda</p>
             </div>
           </div>
         </div>
@@ -175,19 +175,19 @@
               <span class=""><img src="<?php echo base_url('assets/website/img/video-conference.svg'); ?> " width="50%"></span>
             </div>
             <div class="media-body p-2 mt-3">
-              <h3 class="heading">Video Conference</h3>
-              <p>Fasilitas telekonsultasi dengan video call yang tertanam dalam satu (1) aplikasi, tanpa harus menggunakan platform lain di luar aplikasi</p>
+              <h3 class="heading">Telekonsultasi</h3>
+              <p>Fasilitas telekonsultasi dengan video call dan chat yang tertanam dalam satu (1) aplikasi, tanpa harus menggunakan platform lain di luar aplikasi</p>
             </div>
           </div>
         </div>
         <div class="col-md-3 d-flex align-self-stretch ftco-animate">
           <div class="media block-6 services d-block text-center">
             <div class="icon d-flex justify-content-center align-items-center">
-              <span class=""><img src="<?php echo base_url('assets/website/img/chat.svg'); ?> " width="50%"></span>
+              <span class=""><img src="<?php echo base_url('assets/website/img/medrec-pet.svg'); ?> " width="50%"></span>
             </div>
             <div class="media-body p-2 mt-3">
-              <h3 class="heading">Chat</h3>
-              <p>Kirimkan hasil pemeriksaan penunjang, atau foto yang terkait pengobatan tanpa harus keluar dari sistem</p>
+              <h3 class="heading">Rekam Medis</h3>
+              <p>Sistem Telekonsultasi yang terintegrasi SIMRS, sehingga diagnosa dapat langsung mengisi pada catatan medis (Mini EMR)</p>
             </div>
           </div>
         </div>
