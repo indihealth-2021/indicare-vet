@@ -183,7 +183,7 @@
         <div class="col-md-3 d-flex align-self-stretch ftco-animate">
           <div class="media block-6 services d-block text-center">
             <div class="icon d-flex justify-content-center align-items-center">
-              <span class=""><img src="<?php echo base_url('assets/website/img/medrec-pet.svg'); ?> " width="50%"></span>
+              <span class=""><img src="<?php echo base_url('assets/website/img/medrec-pet.svg'); ?>" width="50%"></span>
             </div>
             <div class="media-body p-2 mt-3">
               <h3 class="heading">Rekam Medis</h3>
@@ -194,11 +194,11 @@
         <div class="col-md-3 d-flex align-self-stretch ftco-animate">
           <div class="media block-6 services d-block text-center">
             <div class="icon d-flex justify-content-center align-items-center">
-              <span class=""><img src="<?php echo base_url('assets/website/img/drug.svg'); ?> " width="50%"></span>
+              <span class=""><img src="<?php echo base_url('assets/website/img/petshop.svg'); ?> " width="50%"></span>
             </div>
             <div class="media-body p-2 mt-3">
-              <h3 class="heading">Resep Obat</h3>
-              <p>Memudahkan dokter memberikan resep yang terintegrasi dengan SIMRS, tanpa harus khawatir dengan status stok obat</p>
+              <h3 class="heading">Pet Shop</h3>
+              <p>Temukan segala kebutuhan hewan peliharaan Anda dengan produk berkualitas dan layanan ramah yang membuat perawatan menjadi menyenangkan dan mudah.</p>
             </div>
           </div>
         </div>
