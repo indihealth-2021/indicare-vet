@@ -176,7 +176,7 @@
             </div>
             <div class="media-body p-2 mt-3">
               <h3 class="heading">Telemedicine</h3>
-              <p>Fasilitas telekonsultasi dengan video call dan chat yang tertanam dalam satu (1) aplikasi, tanpa harus menggunakan platform lain di luar aplikasi</p>
+              <p>Fasilitas telekonsultasi dengan video call dan chat yang tertanam dalam satu (1) aplikasi, tanpa harus menggunakan platform lain</p>
             </div>
           </div>
         </div>
@@ -198,7 +198,7 @@
             </div>
             <div class="media-body p-2 mt-3">
               <h3 class="heading">Pet Shop</h3>
-              <p>Temukan segala kebutuhan hewan peliharaan Anda dengan produk berkualitas dan layanan ramah yang membuat perawatan menjadi menyenangkan dan mudah.</p>
+              <p>Temukan segala kebutuhan hewan peliharaan Anda dengan produk berkualitas dan layanan ramah yang membuat perawatan menjadi mudah</p>
             </div>
           </div>
         </div>
