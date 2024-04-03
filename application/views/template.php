@@ -288,7 +288,7 @@
     <?php if ($user_2 && $user_2->id_user_kategori == 6) { ?>
       <div class="modal fade" id="jawaban_pengampu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content mx-auto" style="width: 400px">
+          <div class="modal-content mx-auto">
             <div class="modal-header">
               <p class="modal-title font-24" id="exampleModalLabel">Panggilan...</p>
 
@@ -309,7 +309,7 @@
     <?php if ($user_2 && $user_2->id_user_kategori == 0) { ?>
       <div class="modal fade" id="jawaban" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content mx-auto" style="width: 400px">
+          <div class="modal-content mx-auto">
             <div class="modal-header">
               <p class="modal-title font-24" id="name_panggilan"></p>
 
