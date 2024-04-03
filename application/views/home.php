@@ -175,7 +175,7 @@
               <span class=""><img src="<?php echo base_url('assets/website/img/video-conference.svg'); ?> " width="50%"></span>
             </div>
             <div class="media-body p-2 mt-3">
-              <h3 class="heading">Telekonsultasi</h3>
+              <h3 class="heading">Telemedicine</h3>
               <p>Fasilitas telekonsultasi dengan video call dan chat yang tertanam dalam satu (1) aplikasi, tanpa harus menggunakan platform lain di luar aplikasi</p>
             </div>
           </div>
