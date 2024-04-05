@@ -154,7 +154,7 @@
       <div class="row justify-content-center mb-5 pb-5">
         <div class="col-md-11 text-center heading-section ftco-animate">
           <h2 class="mb-2">Layanan kami</h2>
-          <p>Telemedicine kami adalah telemedicine yang sesuai dengan regulasi Kementrian Kesehatan, yaitu pelaksanaan di bawah Fasilitas Pelayanan Kesehatan (FasYanKes)</p>
+          <p>Telemedicine kami adalah telemedicine yang sesuai dengan kebutuhan pelayanan veterinary , yaitu pelaksanaan di bawah Fasilitas Pelayanan veterinary.</p>
         </div>
       </div>
       <div class="row">

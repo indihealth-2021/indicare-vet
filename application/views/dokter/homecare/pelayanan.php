@@ -305,7 +305,7 @@
          formdata.append('jumlah_obat', $('input[name=jumlah_obat]').val());
          formdata.append('id_pasien', $('input[name=id_pasien]').val());
          formdata.append('id_dokter', '<?php echo $user->id ?>');
-         formdata.append('id_jadwal_konsultasi', $('input[name=id_jadwal_konsultasi]').val());
+         //  formdata.append('id_jadwal_konsultasi', $('input[name=id_jadwal_konsultasi]').val());
          formdata.append('keterangan', $('input[name=keterangan]').val());
          formdata.append('satuan_obat', $('input[name=satuan_obat]').val());
          axios.post(baseUrl + 'dokter/Teleconsultasi/cartResep', formdata)
