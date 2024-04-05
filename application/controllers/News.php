@@ -15,7 +15,7 @@ class News extends CI_Controller
         // $this->data->view = 'Home';
         $data['menu_landing'] = 2;
         // $data['news'] = $this->all_model->select('data_news','result');
-        $data['other_news'] = $this->db->query('SELECT * FROM data_news ORDER BY created_at LIMIT 0,5')->result();
+        $data['other_news'] = $this->db->query('SELECT * FROM data_news ORDER BY created_at LIMIT 0,4')->result();
 
         $config['base_url'] = site_url('News/index'); //site url
         $count_rows = $this->db->query('SELECT id FROM data_news');
@@ -62,7 +62,7 @@ class News extends CI_Controller
         $data['menu_landing'] = 2;
         $data['news'] = $this->all_model->select('data_news', 'row', $where);
         $data['all_news'] = $this->all_model->select('data_news', 'result');
-        $data['other_news'] = $this->db->query('SELECT * FROM data_news ORDER BY created_at LIMIT 0,3')->result();
+        $data['other_news'] = $this->db->query('SELECT * FROM data_news ORDER BY created_at LIMIT 0,4')->result();
 
         $this->load->view('detail_news', $data);
     }
@@ -73,7 +73,7 @@ class News extends CI_Controller
         $data['menu_landing'] = 2;
         // $data['news'] = $this->all_model->get_search($input);
         //     $this->load->view('news', $data);
-        $data['other_news'] = $this->db->query('SELECT * FROM data_news ORDER BY created_at LIMIT 0,3')->result();
+        $data['other_news'] = $this->db->query('SELECT * FROM data_news ORDER BY created_at LIMIT 0,4')->result();
 
         $config['base_url'] = site_url('News/index'); //site url
         $count_rows = $this->db->query('SELECT id FROM data_news');
